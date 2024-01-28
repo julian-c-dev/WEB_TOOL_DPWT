@@ -1,0 +1,18 @@
+{
+  "navLinks": [
+    { "id": "buyMeACoffee", "title": "Comprame un cafe" },
+    { "id": "github", "title": "Github" }
+  ],
+  "title": "¡Creemos tu propio Fondo de Pantalla de Productividad!!",
+
+  "cards": {
+    "bg": "Selecciona tu fondo favorito:",
+    "shape": "¿Prefieres azulejos o líneas?",
+    "division": "¿Cuántas divisiones?",
+    "resolution": "Elige la resolución:"
+  },
+  "button": {
+    "reset": "Resetear",
+    "generate": "Generar"
+  }
+}
