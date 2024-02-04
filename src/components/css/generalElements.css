@@ -1,0 +1,15 @@
+.allow_card {
+  background-color: white;
+}
+
+.disable_card {
+  background-color: gray;
+}
+
+.allow_button {
+  cursor: pointer;
+}
+
+.disable_button {
+  cursor: not-allowed;
+}

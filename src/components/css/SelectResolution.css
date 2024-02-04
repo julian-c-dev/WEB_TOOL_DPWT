@@ -1,0 +1,25 @@
+input[type="radio"]:after {
+  width: 14px;
+  height: 14px;
+  border-radius: 12px;
+  top: -8px;
+  left: -1px;
+  position: relative;
+  background-color: #d1d3d1;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+}
+
+input[type="radio"]:checked:after {
+  width: 14px;
+  height: 14px;
+  border-radius: 12px;
+  top: -8px;
+  left: -1px;
+  position: relative;
+  background-color: black;
+  content: "";
+  display: inline-block;
+  visibility: visible;
+}

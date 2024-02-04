@@ -1,28 +1,37 @@
 import { useState } from "react";
-import { close, logo, menu, coffee, github } from "../assets";
+import { logo, timer, coffee, github } from "../assets";
 import FlagSwitch from "./Flagswitch";
 import { useTranslation } from "react-i18next";
+import styles from "../style";
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
   const { t } = useTranslation();
+  const title1 = t("title.1");
+  const title2 = t("title.2");
+  const title3 = t("title.3");
+
   const navLinks = t("navLinks");
   const handleToggle = (newToggle) => {
     setToggle(newToggle);
   };
   return (
-    <div className="w-full flex py-6 justify-between items-center navbar">
+    <div className="w-full py-2 flex justify-between items-center navbar">
       {/* LOGO */}
       <img src={logo} alt="Productivyt log" className="w-[55px] h-[32px]" />
-      <span className="mx-16" key="flagswitch">
-        <FlagSwitch onToggle={handleToggle} />
-      </span>
+
+      <h1 className={` ${styles.navTitle}  ${styles.flexCenter} gap-2`}>
+        <span>{title1}</span>
+        <span className="text-secondary">{title2}</span>
+        <span>{title3}</span>
+        <img src={timer} alt="Productivyt log" className="w-[35px] h-[35px]" />
+      </h1>
 
       <ul className="list-none sm:flex hidden justify-end items-center flex-1">
-        {/* FLAGSWITCH - Select Language */}
-
-        {/* BUTTONS */}
-        {navLinks.map((nav, index) => {
+        <li className="mx-16" key="flagswitch">
+          <FlagSwitch onToggle={handleToggle} />
+        </li>
+        {/* {navLinks.map((nav, index) => {
           const isLast = index === navLinks.length - 1;
           const iconSrc = nav.id === "buyMeACoffee" ? coffee : github;
 
@@ -33,7 +42,14 @@ const Navbar = () => {
                 isLast ? "mr-0" : "mr-10"
               }`}
             >
-              <a className="mx-4 flex gap-2 items-center" href={`#${nav.id}`}>
+              <a
+                className="mx-4 flex gap-2 items-center"
+                href={`${
+                  nav.id === "buyMeACoffee"
+                    ? "https://www.buymeacoffee.com/julian.c.dev"
+                    : "#"
+                }`}
+              >
                 {nav.title}
                 {nav.id === "buyMeACoffee" || nav.id === "github" ? (
                   <img
@@ -45,37 +61,8 @@ const Navbar = () => {
               </a>
             </li>
           );
-        })}
+        })} */}
       </ul>
-
-      {/* MOBILE MENU */}
-
-      <div className="sm:hidden flex flex-1 justify-end items-center">
-        <img
-          src={toggle ? close : menu}
-          alt="menu"
-          className="wp-[28px] h-[28px] object-contain"
-          onClick={() => setToggle((prev) => !prev)}
-        />
-        <div
-          className={`${
-            toggle ? "flex" : "hidden"
-          } p-6 bg-black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar`}
-        >
-          <ul className="list-none flex flex-col justify-end items-center flex-1">
-            {navLinks.map((nav, index) => (
-              <li
-                key={nav.id}
-                className={`font-poppins font-normal cursor-pointer text-[16px] ${
-                  index === navLinks.length - 1 ? "mr-0" : "mb-4"
-                } text-white`}
-              >
-                <a href={`#${nav.id}`}>{nav.title}</a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
     </div>
   );
 };

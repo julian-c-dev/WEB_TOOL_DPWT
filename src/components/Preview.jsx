@@ -1,30 +1,119 @@
 import styles from "../style";
+import "./css/preview.css";
 
-const Preview = ({ selectedBg, selectedShape }) => {
+const Preview = ({ selectedBg, selectedShape, selectedDivision }) => {
+  //* Columns of the grid in <ul> tag based on variable Division
+  let cols;
+  if (selectedDivision == 2 || selectedDivision == 4) {
+    cols = 2;
+  } else if (selectedDivision == 6) {
+    cols = 3;
+  } else if (selectedDivision == 8) {
+    cols = 4;
+  }
+
   return (
     <section
-      className={`w-[348px] h-[200px] relative p-5 ${styles.flexCenter} bg-black-gradient-2 border-8 border-white rounded-[20px] box-shadow`}
-      style={{ background: selectedBg }}
+      className={`w-[348px] h-[200px] relative p-4 ${styles.flexCenter} bg-black-gradient-2 border-8 border-white rounded-[20px] box-shadow`}
+      style={{ background: selectedBg || "rgb(0,4,16)" }}
     >
-      <p className={`${styles.paragraph} text-white text-[45px] `}>
-        {selectedShape ? "" : "P W D T  "}
+      <p
+        className={`${styles.paragraph} ${styles.flexCenter} flex-col absolute top-3 left-3 right-0 text-white text-[30px] leading-[40px] align-center`}
+      >
+        {selectedShape ? (
+          ""
+        ) : (
+          <>
+            <span>
+              Desktop
+              <br />
+            </span>
+            <span className={styles.wordHighlight}>
+              Productivity <br />
+            </span>
+            <span className={styles.wordHighlight}>
+              Wallpaper <br />
+            </span>
+            <span>
+              Tool <br />
+            </span>
+          </>
+        )}
       </p>
-      <ul className={`grid grid-cols-4 gap-4`}>
+      <ul
+        className={`gap-4`}
+        style={{ display: "grid", gridTemplateColumns: `repeat(${cols}, 1fr)` }}
+      >
         {(() => {
-          if (selectedShape === "tiles") {
+          //* 4 Options of TILES
+          if (selectedShape === "tiles" && selectedDivision === 8) {
             return [1, 2, 3, 4, 5, 6, 7, 8].map((index) => (
               <li
                 key={index}
-                className={`${styles.preview8TileSelection} bg-white opacity-30 rounded-[20px] box-shadow`}
+                className={`${styles.tilePreview} ${styles.preview8TileSelection} `}
               ></li>
             ));
           }
-          if (selectedShape === "lines") {
+          if (selectedShape === "tiles" && selectedDivision === 6) {
+            return [1, 2, 3, 4, 5, 6].map((index) => (
+              <li
+                key={index}
+                className={` ${styles.tilePreview} ${styles.preview6TileSelection}`}
+              ></li>
+            ));
+          }
+          if (selectedShape === "tiles" && selectedDivision === 4) {
+            return [1, 2, 3, 4].map((index) => (
+              <li
+                key={index}
+                className={` ${styles.tilePreview} ${styles.preview4TileSelection}`}
+              ></li>
+            ));
+          }
+          if (selectedShape === "tiles" && selectedDivision === 2) {
+            return [1, 2].map((index) => (
+              <li
+                key={index}
+                className={` ${styles.tilePreview} ${styles.preview2TileSelection}`}
+              ></li>
+            ));
+          }
+
+          //* 4 Options of LINES
+          if (selectedShape === "lines" && selectedDivision === 8) {
+            return (
+              <>
+                <li className="absolute right-1/4 top-0 w-2 h-[190px] bg-white "></li>
+                <li className="absolute left-1/4  top-0 w-2 h-[190px] bg-white "></li>
+                <li className="absolute right-[48.5%] top-0 w-2 h-[190px] bg-white "></li>
+                <li className="absolute left-[50%] transform -translate-x-1/2 top-[48.2%] w-[340px] h-2 bg-white"></li>
+              </>
+            );
+          }
+
+          if (selectedShape === "lines" && selectedDivision === 6) {
             return (
               <>
                 <li className="absolute right-1/3 top-0 w-2 h-[190px] bg-white "></li>
                 <li className="absolute left-1/3 top-0 w-2 h-[190px] bg-white "></li>
-                <li className="absolute left-[50%] transform -translate-x-1/2 top-[48.5%] w-[340px] h-2 bg-white"></li>
+                <li className="absolute left-[50%] transform -translate-x-1/2 top-[48.2%] w-[340px] h-2 bg-white"></li>
+              </>
+            );
+          }
+
+          if (selectedShape === "lines" && selectedDivision === 4) {
+            return (
+              <>
+                <li className="absolute left-[50%] transform -translate-x-1/2 top-[48.2%] w-[340px] h-2 bg-white"></li>
+                <li className="absolute right-[48.5%] top-0 w-2 h-[190px] bg-white "></li>
+              </>
+            );
+          }
+
+          if (selectedShape === "lines" && selectedDivision === 2) {
+            return (
+              <>
+                <li className="absolute right-[48.5%] top-0 w-2 h-[190px] bg-white "></li>
               </>
             );
           }
@@ -35,79 +124,3 @@ const Preview = ({ selectedBg, selectedShape }) => {
 };
 
 export default Preview;
-
-{
-  /* DIVISION TILES 2 -> NOTE <ul className={`grid grid-cols-2 gap-4`}>
-if (selectedShape === "tiles") {
-            return [1, 2].map((index) => (
-              <li
-                key={index}
-                className={`${styles.preview2TileSelection} bg-white opacity-30 rounded-[20px] box-shadow`}
-              ></li>
-            ));
-          }
-
-
-*/
-  /* DIVISION TILES 4 -> NOTE <ul className={`grid grid-cols-2 gap-4`}>
-if (selectedShape === "tiles") {
-            return [1, 2, 3, 4].map((index) => (
-              <li
-                key={index}
-                className={`${styles.preview4TileSelection} bg-white opacity-30 rounded-[20px] box-shadow`}
-              ></li>
-            ));
-          }
-*/
-  /*  DIVISION TILES 6 -> NOTE <ul className={`grid grid-cols-3 gap-4`}>
-
-if (selectedShape === "tiles") {
-            return [1, 2, 3, 4, 5, 6].map((index) => (
-              <li
-                key={index}
-                className={`${styles.preview6TileSelection} bg-white opacity-30 rounded-[20px] box-shadow`}
-              ></li>
-            ));
-          }
-*/
-  /* DIVISION TILES 8 -> <ul className={`grid grid-cols-4 gap-4`}>
-if (selectedShape === "tiles") {
-            return [1, 2, 3, 4, 5, 6, 7, 8].map((index) => (
-              <li
-                key={index}
-                className={`${styles.preview8TileSelection} bg-white opacity-30 rounded-[20px] box-shadow`}
-              ></li>
-            ));
-          }
-
-
-
-*/
-  /* DIVISION LINES 2
-<>
-<li className="absolute right-[48.5%] top-0 w-2 h-[190px] bg-white "></li>
-</>
-*/
-  /* DIVISION LINES 4 
-<>
-<li className="absolute left-[50%] transform -translate-x-1/2 top-1/2 w-[340px] h-2 bg-white"></li>
-<li className="absolute right-[48.5%] top-0 w-2 h-[190px] bg-white "></li>
-</> 
-*/
-  /*  DIVISION LINES 6
-<>
-<li className="absolute right-1/3 top-0 w-2 h-[190px] bg-white "></li>
-<li className="absolute left-1/3 top-0 w-2 h-[190px] bg-white "></li>
-<li className="absolute left-[50%] transform -translate-x-1/2 top-[48.5%] w-[340px] h-2 bg-white"></li>
-</>
-*/
-  /** DIVISION LINES 8
-<>
-<li className="absolute right-1/4 top-0 w-2 h-[190px] bg-white "></li>
-<li className="absolute left-1/4  top-0 w-2 h-[190px] bg-white "></li>
-<li className="absolute right-[48.5%] top-0 w-2 h-[190px] bg-white "></li>
-<li className="absolute left-[50%] transform -translate-x-1/2 top-[48.5%] w-[340px] h-2 bg-white"></li>
-</> 
-
- */
-}

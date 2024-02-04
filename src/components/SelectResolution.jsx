@@ -1,44 +1,89 @@
 import React, { useState } from "react";
 import styles from "../style";
+import "./css/SelectResolution.css";
+import "./css/generalElements.css";
 import { useTranslation } from "react-i18next";
 
-const SelectResolution = () => {
+const SelectResolution = ({ onSelectResolution, hasSelectedShape }) => {
   const { t } = useTranslation();
   const card_sentence = t("cards.resolution");
   const [selectedResolution, setSelectedResolution] = useState(null);
 
   const handleResolutionChange = (resolution) => {
     setSelectedResolution(resolution);
-    console.log("Selected resolution:", resolution);
+    onSelectResolution(resolution);
   };
 
   return (
-    <div className={`${styles.card} ${styles.bgGray} ${styles.textWhite}`}>
+    <div
+      className={`${styles.card} ${hasSelectedShape ? "" : styles.disableCard}`}
+    >
       <p className={`${styles.paragraph} ${styles.paddingY}`}>
         {card_sentence}
       </p>
-      <div className={`flex flex-col gap-2`}>
-        <label className={`inline-flex items-center ${styles.textGray}`}>
+      <div className={`flex flex-col  `}>
+        <label
+          htmlFor="resolution1"
+          style={hasSelectedShape ? {} : { pointerEvents: "none" }}
+          className={`inline-flex items-center ${styles.restolutionChoices} ${
+            hasSelectedShape ? "cursor-pointer" : ""
+          }`}
+        >
           <input
+            style={hasSelectedShape ? {} : { pointerEvents: "none" }}
             type="radio"
-            name="resolution"
-            value="1900x800"
-            checked={selectedResolution === "1900x800"}
-            onChange={() => handleResolutionChange("1900x800")}
-            className={`form-radio ${styles.textGray}`}
+            id="resolution1"
+            name="resolution1"
+            value="resolution1"
+            checked={selectedResolution === "resolution1"}
+            onChange={() => handleResolutionChange("resolution1")}
+            className={`${styles.restolutionChoices} ${
+              hasSelectedShape ? "cursor-pointer" : ""
+            } `}
           />
-          <span className={`ml-2`}>1900x800</span>
+          <span className={`ml-2`}>HD - 1280 x 720</span>
         </label>
-        <label className={`inline-flex items-center ${styles.textGray}`}>
+        <label
+          htmlFor="resolution2"
+          style={hasSelectedShape ? {} : { pointerEvents: "none" }}
+          className={`inline-flex items-center ${styles.restolutionChoices} ${
+            hasSelectedShape ? "cursor-pointer" : ""
+          }`}
+        >
           <input
+            style={hasSelectedShape ? {} : { pointerEvents: "none" }}
             type="radio"
-            name="resolution"
-            value="1920x1080"
-            checked={selectedResolution === "1920x1080"}
-            onChange={() => handleResolutionChange("1920x1080")}
-            className={`form-radio ${styles.textGray}`}
+            id="resolution2"
+            name="resolution2"
+            value="resolution2"
+            checked={selectedResolution === "resolution2"}
+            onChange={() => handleResolutionChange("resolution2")}
+            className={`${styles.restolutionChoices} ${
+              hasSelectedShape ? "cursor-pointer" : ""
+            } `}
           />
-          <span className={`ml-2`}>1920x1080</span>
+          <span className={`ml-2`}>Full HD - 1920 x 1080</span>
+        </label>
+        <label
+          htmlFor="resolution3"
+          style={hasSelectedShape ? {} : { pointerEvents: "none" }}
+          className={`inline-flex items-center ${styles.restolutionChoices} ${
+            hasSelectedShape ? "cursor-pointer" : ""
+          }`}
+        >
+          <input
+            style={hasSelectedShape ? {} : { pointerEvents: "none" }}
+            type="radio"
+            id="resolution3"
+            name="resolution3"
+            value="resolution3"
+            checked={selectedResolution === "resolution3"}
+            onChange={() => handleResolutionChange("resolution3")}
+            className={`${styles.restolutionChoices} ${
+              hasSelectedShape ? "cursor-pointer" : ""
+            }`}
+          />
+          <span className={`ml-2`}>MacBook Pro - 3024 x 1964</span>
         </label>
       </div>
     </div>

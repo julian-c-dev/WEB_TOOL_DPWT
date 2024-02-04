@@ -4,7 +4,13 @@
     { "id": "github", "title": "Github" }
   ],
 
-  "title": "Let's create your own Productivity WallPaper!",
+  "title": {
+    "1": "Create your own ",
+    "2": "Productivity Wallpaper ",
+    "3": "in less than a 30 seconds!"
+  },
+
+  "free": "100% FREE!",
 
   "cards": {
     "bg": "Select your favorite background:",

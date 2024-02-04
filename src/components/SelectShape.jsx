@@ -1,37 +1,39 @@
-import React, { useState } from "react";
-import { lines_black, lines_green, tiles_black, tiles_green } from "../assets";
+import React from "react";
+import { lines_black, tiles_black } from "../assets";
 import { useTranslation } from "react-i18next";
-
 import styles from "../style";
+import "./css/generalElements.css";
 
-const SelectShape = ({ onSelectShape }) => {
+const SelectShape = ({ onSelectShape, hasSelectedBg }) => {
   const { t } = useTranslation();
   const card_sentence = t("cards.shape");
-  const [isLinesHovered, setLinesHovered] = useState(false);
-  const [isTilesHovered, setTilesHovered] = useState(false);
-
   const handleSelectShape = (shape) => {
     onSelectShape(shape);
   };
 
   return (
-    <div className={`${styles.card}`}>
+    <div
+      className={`${styles.card} ${hasSelectedBg ? "" : styles.disableCard}`}
+    >
       <p className={` ${styles.paragraph} ${styles.paddingY}`}>
         {card_sentence}
       </p>
-      <div className={` ${styles.flexCenter} gap-8 sm:pb-12 pb-10 `}>
+      <div className={` ${styles.flexCenter} gap-6 py-4 px-8 `}>
         <img
-          src={isTilesHovered ? tiles_green : tiles_black}
-          className={`w-[100px] h-[50px] cursor-pointer`}
-          onMouseEnter={() => setTilesHovered(true)}
-          onMouseLeave={() => setTilesHovered(false)}
+          style={hasSelectedBg ? {} : { pointerEvents: "none" }}
+          src={tiles_black}
+          className={`w-[150px] h-[75px] ${
+            hasSelectedBg ? "cursor-pointer hover:opacity-30" : ""
+          } `}
           onClick={() => handleSelectShape("tiles")}
         />
+
         <img
-          src={isLinesHovered ? lines_green : lines_black}
-          className={`w-[100px] h-[50px] cursor-pointer`}
-          onMouseEnter={() => setLinesHovered(true)}
-          onMouseLeave={() => setLinesHovered(false)}
+          style={hasSelectedBg ? {} : { pointerEvents: "none" }}
+          src={lines_black}
+          className={`w-[150px] h-[75px] ${
+            hasSelectedBg ? "cursor-pointer hover:opacity-30" : ""
+          }`}
           onClick={() => handleSelectShape("lines")}
         />
       </div>

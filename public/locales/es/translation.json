@@ -3,7 +3,13 @@
     { "id": "buyMeACoffee", "title": "Comprame un cafe" },
     { "id": "github", "title": "Github" }
   ],
-  "title": "¡Creemos tu propio Fondo de Pantalla de Productividad!!",
+
+  "title": {
+    "1": "¡Crea tu propio",
+    "2": "Fondo de Escritorio Productivo",
+    "3": "en menos de 30 segundos!"
+  },
+  "free": "100% GRATIS",
 
   "cards": {
     "bg": "Selecciona tu fondo favorito:",

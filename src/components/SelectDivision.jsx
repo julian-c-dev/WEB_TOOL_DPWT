@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../style";
 import "./css/SelectDivision.css";
+import "./css/generalElements.css";
 import { useTranslation } from "react-i18next";
 
-const SelectDivision = () => {
+const SelectDivision = ({ onSelectDivision, hasSelectedShape }) => {
   const { t } = useTranslation();
   const card_sentence = t("cards.division");
 
   const [selectedValue, setSelectedValue] = useState(4);
+
+  useEffect(() => {
+    onSelectDivision(selectedValue); // Send the default value when component mounts
+  }, []);
 
   const handleInputChange = (e) => {
     const allowedValues = [2, 4, 6, 8];
@@ -15,18 +20,21 @@ const SelectDivision = () => {
 
     if (allowedValues.includes(inputValue)) {
       setSelectedValue(inputValue);
-      console.log("Selected value:", inputValue);
+      onSelectDivision(inputValue);
     }
   };
 
   return (
-    <div className={` ${styles.card}`}>
+    <div
+      className={`${styles.card} ${hasSelectedShape ? "" : styles.disableCard}`}
+    >
       <p className={` ${styles.paragraph} ${styles.paddingY}`}>
         {card_sentence}
       </p>
       <div className={` ${styles.flexCenter} flex-col`}>
         <p className={` ${styles.number} `}>{selectedValue}</p>
         <input
+          style={hasSelectedShape ? {} : { pointerEvents: "none" }}
           id="typeinp"
           type="range"
           min="2"
