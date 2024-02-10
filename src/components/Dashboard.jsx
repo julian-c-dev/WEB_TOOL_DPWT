@@ -5,7 +5,6 @@ import SelectShape from "./SelectShape";
 import SelectResolution from "./SelectResolution";
 import SelectDivision from "./SelectDivision";
 import Preview from "./Preview";
-import ButtonReset from "./ButtonReset";
 import { useTranslation } from "react-i18next";
 import ButtonGenerate from "./ButtonGenerate";
 
@@ -16,7 +15,7 @@ const Dashboard = () => {
   const generateButtonText = t("button.generate");
   const [selectedBg, setSelectedBg] = useState(null);
   const [selectedShape, setSelectedShape] = useState(null);
-  const [selectedDivision, setSelectedDivision] = useState(null);
+  const [selectedDivision, setSelectedDivision] = useState(4);
   const [selectedResolution, setSelectedResolution] = useState(null);
 
   const handleSelectBg = (bg) => {
@@ -32,6 +31,13 @@ const Dashboard = () => {
 
   const handleSelectResolution = (resolution) => {
     setSelectedResolution(resolution);
+  };
+
+  const handleReset = () => {
+    setSelectedBg(null);
+    setSelectedShape(null);
+    setSelectedDivision(4);
+    setSelectedResolution(null);
   };
 
   return (
@@ -54,6 +60,7 @@ const Dashboard = () => {
           <SelectResolution
             onSelectResolution={handleSelectResolution}
             hasSelectedShape={selectedShape !== null}
+            selectedResolution={selectedResolution}
           />
         </div>
         <div className={`w-1/4 ${styles.flexCenter} flex-col gap-4`}>
@@ -68,10 +75,18 @@ const Dashboard = () => {
             />
           </div>
           <div className={`${styles.flexCenter} gap-4`}>
-            <ButtonReset
-              onContent={resetButtonText}
-              hasSelectedBg={selectedBg !== null}
-            />
+            <button
+              type="button"
+              className={` py-4 px-6 font-poppins font-medium text-[18px]outline-none rounded-[10px] w-[127.995px]
+            ${
+              selectedBg !== null ? styles.normalButton : styles.disableButton
+            } ""
+          `}
+              style={selectedBg !== null ? {} : { pointerEvents: "none" }}
+              onClick={handleReset}
+            >
+              {resetButtonText}
+            </button>
             <ButtonGenerate
               onContent={generateButtonText}
               hasSelectedResolution={selectedResolution !== null}

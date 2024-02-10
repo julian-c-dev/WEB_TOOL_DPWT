@@ -1,16 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../style";
 import "./css/SelectResolution.css";
 import "./css/generalElements.css";
 import { useTranslation } from "react-i18next";
 
-const SelectResolution = ({ onSelectResolution, hasSelectedShape }) => {
+const SelectResolution = ({
+  onSelectResolution,
+  hasSelectedShape,
+  selectedResolution,
+}) => {
   const { t } = useTranslation();
   const card_sentence = t("cards.resolution");
-  const [selectedResolution, setSelectedResolution] = useState(null);
+
+  const [resolution, setResolution] = useState(selectedResolution);
+
+  useEffect(() => {
+    setResolution(selectedResolution); // Actualizar la resolución seleccionada cuando cambie
+  }, [selectedResolution]);
 
   const handleResolutionChange = (resolution) => {
-    setSelectedResolution(resolution);
+    setResolution(resolution);
     onSelectResolution(resolution);
   };
 

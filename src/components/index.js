@@ -6,7 +6,6 @@ import SelectDivision from "./SelectDivision";
 import Dashboard from "./Dashboard";
 import Footer from "./Footer";
 import Preview from "./Preview";
-import ButtonReset from "./ButtonReset";
 import ButtonGenerate from "./ButtonGenerate";
 
 export {
@@ -18,6 +17,5 @@ export {
   Dashboard,
   Footer,
   Preview,
-  ButtonReset,
   ButtonGenerate,
 };

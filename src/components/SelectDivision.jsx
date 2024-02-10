@@ -8,11 +8,19 @@ const SelectDivision = ({ onSelectDivision, hasSelectedShape }) => {
   const { t } = useTranslation();
   const card_sentence = t("cards.division");
 
-  const [selectedValue, setSelectedValue] = useState(4);
+  // Initialize selectedValue to the initial value passed from the parent component
+  const [selectedValue, setSelectedValue] = useState(
+    hasSelectedShape ? 4 : null
+  );
 
+  // Update selectedValue when hasSelectedShape changes
   useEffect(() => {
-    onSelectDivision(selectedValue); // Send the default value when component mounts
-  }, []);
+    if (hasSelectedShape) {
+      setSelectedValue(4);
+    } else {
+      setSelectedValue(null);
+    }
+  }, [hasSelectedShape]);
 
   const handleInputChange = (e) => {
     const allowedValues = [2, 4, 6, 8];
@@ -32,7 +40,7 @@ const SelectDivision = ({ onSelectDivision, hasSelectedShape }) => {
         {card_sentence}
       </p>
       <div className={` ${styles.flexCenter} flex-col`}>
-        <p className={` ${styles.number} `}>{selectedValue}</p>
+        <p className={` ${styles.number} `}>{selectedValue || 4}</p>
         <input
           style={hasSelectedShape ? {} : { pointerEvents: "none" }}
           id="typeinp"
@@ -40,7 +48,7 @@ const SelectDivision = ({ onSelectDivision, hasSelectedShape }) => {
           min="2"
           max="8"
           step="2"
-          value={selectedValue}
+          value={selectedValue || 4}
           onChange={handleInputChange}
           className={`range-style ${styles.paddingY}`}
         />
