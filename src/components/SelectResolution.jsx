@@ -8,9 +8,11 @@ const SelectResolution = ({
   onSelectResolution,
   hasSelectedShape,
   selectedResolution,
+  isNotDarkMode,
 }) => {
   const { t } = useTranslation();
   const card_sentence = t("cards.resolution");
+  const disableMsg = t("disableMsg");
 
   const [resolution, setResolution] = useState(selectedResolution);
 
@@ -50,7 +52,7 @@ const SelectResolution = ({
               hasSelectedShape ? "cursor-pointer" : ""
             } `}
           />
-          <span className={`ml-2`}>HD - 1280 x 720</span>
+          <span className={`ml-2`}>Full HD - 1920 x 1080</span>
         </label>
         <label
           htmlFor="resolution2"
@@ -65,35 +67,24 @@ const SelectResolution = ({
             id="resolution2"
             name="resolution2"
             value="resolution2"
+            disabled
             checked={selectedResolution === "resolution2"}
             onChange={() => handleResolutionChange("resolution2")}
             className={`${styles.restolutionChoices} ${
-              hasSelectedShape ? "cursor-pointer" : ""
-            } `}
-          />
-          <span className={`ml-2`}>Full HD - 1920 x 1080</span>
-        </label>
-        <label
-          htmlFor="resolution3"
-          style={hasSelectedShape ? {} : { pointerEvents: "none" }}
-          className={`inline-flex items-center ${styles.restolutionChoices} ${
-            hasSelectedShape ? "cursor-pointer" : ""
-          }`}
-        >
-          <input
-            style={hasSelectedShape ? {} : { pointerEvents: "none" }}
-            type="radio"
-            id="resolution3"
-            name="resolution3"
-            value="resolution3"
-            checked={selectedResolution === "resolution3"}
-            onChange={() => handleResolutionChange("resolution3")}
-            className={`${styles.restolutionChoices} ${
-              hasSelectedShape ? "cursor-pointer" : ""
+              hasSelectedShape ? "cursor-not-allowed" : ""
             }`}
           />
-          <span className={`ml-2`}>MacBook Pro - 3024 x 1964</span>
+          <span
+            className={`ml-2 ${
+              hasSelectedShape ? "cursor-not-allowed opacity-50" : ""
+            }`}
+          >
+            MacBook Pro - 3024 x 1964
+          </span>
         </label>
+        <p className="text-xs text-slate-500">
+          {hasSelectedShape ? disableMsg : ""}
+        </p>
       </div>
     </div>
   );

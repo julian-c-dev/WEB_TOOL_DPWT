@@ -1,12 +1,13 @@
-import "./css/FlagSwitch.css";
+// Language.jsx
 import React, { useState, useLayoutEffect } from "react";
 import { useTranslation } from "react-i18next";
+import "./css/Language.css";
 
-const FlagSwitch = ({ onToggle }) => {
+const Language = ({ onToggle }) => {
   const { i18n } = useTranslation();
   const [toggle, setToggle] = useState(() => i18n.language === "en");
 
-  const handleFlagSwitch = () => {
+  const handleLanguage = () => {
     setToggle((prevToggle) => {
       const newToggle = !prevToggle;
       const newLanguage = newToggle ? "en" : "es";
@@ -29,7 +30,7 @@ const FlagSwitch = ({ onToggle }) => {
           type="checkbox"
           id="flagSwitch"
           checked={toggle}
-          onChange={handleFlagSwitch}
+          onChange={handleLanguage}
         />
         <label htmlFor="flagSwitch"></label>
       </div>
@@ -37,4 +38,4 @@ const FlagSwitch = ({ onToggle }) => {
   );
 };
 
-export default FlagSwitch;
+export default Language;

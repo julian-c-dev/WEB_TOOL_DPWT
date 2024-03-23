@@ -1,15 +1,15 @@
 {
-  "navLinks": [
-    { "id": "buyMeACoffee", "title": "Comprame un cafe" },
-    { "id": "github", "title": "Github" }
-  ],
-
   "title": {
     "1": "¡Crea tu propio",
     "2": "Fondo de Escritorio Productivo",
-    "3": "en menos de 30 segundos!"
+    "3": "en menos de 30 seg!"
   },
-  "free": "100% GRATIS",
+  "preview": "Previsualización",
+  "navBarButton": "¿Me invitas a un café?",
+  "language": "Idioma",
+  "theme": "Tema",
+  "screen": "Previsualización",
+  "disableMsg": "MacBook Pro no está disponible aún; pronto lo estará.",
 
   "cards": {
     "bg": "Selecciona tu fondo favorito:",

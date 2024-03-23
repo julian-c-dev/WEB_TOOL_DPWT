@@ -1,16 +1,16 @@
 {
-  "navLinks": [
-    { "id": "buyMeACoffee", "title": "Buy me a coffee" },
-    { "id": "github", "title": "Github" }
-  ],
-
   "title": {
     "1": "Create your own ",
     "2": "Productivity Wallpaper ",
-    "3": "in less than a 30 seconds!"
+    "3": "in less than a 30 sec!"
   },
 
-  "free": "100% FREE!",
+  "preview": "Preview",
+  "navBarButton": "Get me a coffee?",
+  "language": "Language",
+  "theme": "Theme",
+  "screen": "Preview Screen",
+  "disableMsg": "MacBook Pro is not available yet, coming soon!",
 
   "cards": {
     "bg": "Select your favorite background:",

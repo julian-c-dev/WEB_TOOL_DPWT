@@ -85,5 +85,5 @@
 }
 
 .flag-switch input:checked + label:before {
-  background-color: var(--color1);
+  background-color: var(--color2);
 }

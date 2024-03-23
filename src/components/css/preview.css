@@ -1,0 +1,54 @@
+.monitor-mac {
+  border-bottom: 30px solid #f3f3f3;
+  border-radius: 10px;
+}
+
+.monitor-mac::before {
+  content: "";
+  position: absolute;
+  background-color: #f3f3f3;
+  width: 70px;
+  height: 60px;
+  bottom: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+}
+
+.monitor-mac::after {
+  content: "";
+  position: absolute;
+  background-color: #f3f3f3;
+  width: 140px;
+  height: 8px;
+  bottom: -70px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.monitor-windows {
+  border-bottom: 10px solid rgb(100, 100, 100);
+  border-radius: 0px;
+}
+
+.monitor-windows::before {
+  content: "";
+  position: absolute;
+  background-color: rgb(100, 100, 100);
+  width: 20px;
+  height: 40px;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.monitor-windows::after {
+  content: "";
+  position: absolute;
+  background-color: grey;
+  width: 140px;
+  height: 8px;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+}

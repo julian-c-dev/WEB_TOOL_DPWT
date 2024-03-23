@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import styles from "../style";
 import "./css/generalElements.css";
 
-const SelectShape = ({ onSelectShape, hasSelectedBg }) => {
+const SelectShape = ({ onSelectShape, hasSelectedBg, isNotDarkMode }) => {
   const { t } = useTranslation();
   const card_sentence = t("cards.shape");
   const handleSelectShape = (shape) => {
@@ -22,7 +22,7 @@ const SelectShape = ({ onSelectShape, hasSelectedBg }) => {
         <img
           style={hasSelectedBg ? {} : { pointerEvents: "none" }}
           src={tiles_black}
-          className={`w-[150px] h-[75px] ${
+          className={`w-[120px] xl:w-[150px] h-[60px] xl:h-[75px] ${
             hasSelectedBg ? "cursor-pointer hover:opacity-30" : ""
           } `}
           onClick={() => handleSelectShape("tiles")}
@@ -31,7 +31,7 @@ const SelectShape = ({ onSelectShape, hasSelectedBg }) => {
         <img
           style={hasSelectedBg ? {} : { pointerEvents: "none" }}
           src={lines_black}
-          className={`w-[150px] h-[75px] ${
+          className={`w-[120px] xl:w-[150px] h-[60px] xl:h-[75px] ${
             hasSelectedBg ? "cursor-pointer hover:opacity-30" : ""
           }`}
           onClick={() => handleSelectShape("lines")}

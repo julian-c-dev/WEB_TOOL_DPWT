@@ -6,7 +6,10 @@ import SelectDivision from "./SelectDivision";
 import Dashboard from "./Dashboard";
 import Footer from "./Footer";
 import Preview from "./Preview";
-import ButtonGenerate from "./ButtonGenerate";
+import Sidebar from "./Sidebar";
+import InputLightTheme from "./InputLightTheme";
+import InputLanguage from "./InputLanguage";
+import InputSystem from "./InputSystem";
 
 export {
   Navbar,
@@ -17,5 +20,8 @@ export {
   Dashboard,
   Footer,
   Preview,
-  ButtonGenerate,
+  Sidebar,
+  InputLightTheme,
+  InputLanguage,
+  InputSystem,
 };

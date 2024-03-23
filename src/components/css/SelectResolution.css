@@ -2,7 +2,7 @@ input[type="radio"]:after {
   width: 14px;
   height: 14px;
   border-radius: 12px;
-  top: -8px;
+  top: -9px;
   left: -1px;
   position: relative;
   background-color: #d1d3d1;

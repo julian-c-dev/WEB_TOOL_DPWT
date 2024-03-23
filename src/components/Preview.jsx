@@ -1,7 +1,13 @@
+// Preview.jsx
 import styles from "../style";
-import "./css/preview.css";
+import "./css/Preview.css";
 
-const Preview = ({ selectedBg, selectedShape, selectedDivision }) => {
+const Preview = ({
+  selectedBg,
+  selectedShape,
+  selectedDivision,
+  isOSChecked,
+}) => {
   //* Columns of the grid in <ul> tag based on variable Division
   let cols;
   if (selectedDivision == 2 || selectedDivision == 4) {
@@ -14,14 +20,20 @@ const Preview = ({ selectedBg, selectedShape, selectedDivision }) => {
 
   return (
     <section
-      className={`w-[348px] h-[200px] relative p-4 ${styles.flexCenter} bg-black-gradient-2 border-8 border-white rounded-[20px] box-shadow`}
+      id="preview"
+      // if monitor mac -> h-[220px] if monitor-windows -> h-[200]
+      className={`${
+        isOSChecked ? "monitor-windows h-[200px]" : "monitor-mac h-[220px]"
+      } w-[340px]  relative p-4 ${
+        styles.flexCenter
+      } bg-black-gradient-2  box-shadow`}
       style={{ background: selectedBg || "rgb(0,4,16)" }}
     >
       <p
         className={`${styles.paragraph} ${styles.flexCenter} flex-col absolute top-3 left-3 right-0 text-white text-[30px] leading-[40px] align-center`}
       >
-        {selectedShape ? (
-          ""
+        {selectedBg ? (
+          <></>
         ) : (
           <>
             <span>
@@ -42,7 +54,10 @@ const Preview = ({ selectedBg, selectedShape, selectedDivision }) => {
       </p>
       <ul
         className={`gap-4`}
-        style={{ display: "grid", gridTemplateColumns: `repeat(${cols}, 1fr)` }}
+        style={{
+          display: "grid",
+          gridTemplateColumns: `repeat(${cols}, 1fr)`,
+        }}
       >
         {(() => {
           //* 4 Options of TILES
@@ -82,39 +97,39 @@ const Preview = ({ selectedBg, selectedShape, selectedDivision }) => {
           //* 4 Options of LINES
           if (selectedShape === "lines" && selectedDivision === 8) {
             return (
-              <>
-                <li className="absolute right-1/4 top-0 w-2 h-[190px] bg-white "></li>
+              <div className="opacity-30">
+                <li className="absolute right-1/4 top-0 w-2 h-[190px] bg-white  "></li>
                 <li className="absolute left-1/4  top-0 w-2 h-[190px] bg-white "></li>
                 <li className="absolute right-[48.5%] top-0 w-2 h-[190px] bg-white "></li>
-                <li className="absolute left-[50%] transform -translate-x-1/2 top-[48.2%] w-[340px] h-2 bg-white"></li>
-              </>
+                <li className="absolute left-[50%] transform -translate-x-1/2 top-[48.2%] w-[340px] h-2 bg-white "></li>
+              </div>
             );
           }
 
           if (selectedShape === "lines" && selectedDivision === 6) {
             return (
-              <>
+              <div className="opacity-30">
                 <li className="absolute right-1/3 top-0 w-2 h-[190px] bg-white "></li>
                 <li className="absolute left-1/3 top-0 w-2 h-[190px] bg-white "></li>
-                <li className="absolute left-[50%] transform -translate-x-1/2 top-[48.2%] w-[340px] h-2 bg-white"></li>
-              </>
+                <li className="absolute left-[50%] transform -translate-x-1/2 top-[48.2%] w-[340px] h-2 bg-white "></li>
+              </div>
             );
           }
 
           if (selectedShape === "lines" && selectedDivision === 4) {
             return (
-              <>
+              <div className="opacity-30">
                 <li className="absolute left-[50%] transform -translate-x-1/2 top-[48.2%] w-[340px] h-2 bg-white"></li>
                 <li className="absolute right-[48.5%] top-0 w-2 h-[190px] bg-white "></li>
-              </>
+              </div>
             );
           }
 
           if (selectedShape === "lines" && selectedDivision === 2) {
             return (
-              <>
+              <div className="opacity-30">
                 <li className="absolute right-[48.5%] top-0 w-2 h-[190px] bg-white "></li>
-              </>
+              </div>
             );
           }
         })()}

@@ -4,7 +4,11 @@ import "./css/SelectDivision.css";
 import "./css/generalElements.css";
 import { useTranslation } from "react-i18next";
 
-const SelectDivision = ({ onSelectDivision, hasSelectedShape }) => {
+const SelectDivision = ({
+  onSelectDivision,
+  hasSelectedShape,
+  isNotDarkMode,
+}) => {
   const { t } = useTranslation();
   const card_sentence = t("cards.division");
 
@@ -51,7 +55,14 @@ const SelectDivision = ({ onSelectDivision, hasSelectedShape }) => {
           value={selectedValue || 4}
           onChange={handleInputChange}
           className={`range-style ${styles.paddingY}`}
+          list="tickmarks"
         />
+        <p className="list-numbers">
+          <span>2</span>
+          <span>4</span>
+          <span>6</span>
+          <span>8</span>
+        </p>
       </div>
     </div>
   );
