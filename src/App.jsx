@@ -49,7 +49,7 @@ function App() {
   return (
     <I18nextProvider i18n={i18n}>
       <div
-        className={`${isNotDarkMode ? "bg-[#66A5AD]" : "bg-main"} 
+        className={`${isNotDarkMode ? "bg-[#66A5AD] light-mode" : "bg-main"} 
          w-full h-screen flex flex-col`}
       >
         <div className={`${styles.paddingX} ${styles.flexCenter} flex-grow`}>

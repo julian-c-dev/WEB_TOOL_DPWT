@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import styles from "../style";
 import "./css/SelectResolution.css";
 import "./css/generalElements.css";
+import { SlScreenDesktop } from "react-icons/sl";
+import { AiOutlineLaptop } from "react-icons/ai";
+import { FaApple } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 
 const SelectResolution = ({
@@ -34,57 +37,76 @@ const SelectResolution = ({
       </p>
       <div className={`flex flex-col  `}>
         <label
-          htmlFor="resolution1"
+          htmlFor="fhd"
           style={hasSelectedShape ? {} : { pointerEvents: "none" }}
-          className={`inline-flex items-center ${styles.restolutionChoices} ${
-            hasSelectedShape ? "cursor-pointer" : ""
-          }`}
+          className={`flex items-center justify-start gap-2 ${
+            styles.restolutionChoices
+          } ${hasSelectedShape ? "cursor-pointer" : ""}`}
         >
           <input
             style={hasSelectedShape ? {} : { pointerEvents: "none" }}
             type="radio"
-            id="resolution1"
-            name="resolution1"
-            value="resolution1"
-            checked={selectedResolution === "resolution1"}
-            onChange={() => handleResolutionChange("resolution1")}
+            id="fhd"
+            name="fhd"
+            value="fhd"
+            checked={selectedResolution === "fhd"}
+            onChange={() => handleResolutionChange("fhd")}
             className={`${styles.restolutionChoices} ${
               hasSelectedShape ? "cursor-pointer" : ""
             } `}
           />
-          <span className={`ml-2`}>Full HD - 1920 x 1080</span>
+          -
+          <SlScreenDesktop />-
+          <span className={`ml-2`}>Full HD - 1920 x 1080 </span>
         </label>
         <label
-          htmlFor="resolution2"
+          htmlFor="hd"
           style={hasSelectedShape ? {} : { pointerEvents: "none" }}
-          className={`inline-flex items-center ${styles.restolutionChoices} ${
-            hasSelectedShape ? "cursor-pointer" : ""
-          }`}
+          className={`flex items-center justify-start gap-2 ${
+            styles.restolutionChoices
+          } ${hasSelectedShape ? "cursor-pointer" : ""}`}
         >
           <input
             style={hasSelectedShape ? {} : { pointerEvents: "none" }}
             type="radio"
-            id="resolution2"
-            name="resolution2"
-            value="resolution2"
-            disabled
-            checked={selectedResolution === "resolution2"}
-            onChange={() => handleResolutionChange("resolution2")}
+            id="hd"
+            name="hd"
+            value="hd"
+            checked={selectedResolution === "hd"}
+            onChange={() => handleResolutionChange("hd")}
             className={`${styles.restolutionChoices} ${
-              hasSelectedShape ? "cursor-not-allowed" : ""
+              hasSelectedShape ? "cursor-pointer" : ""
+            } `}
+          />
+          -
+          <AiOutlineLaptop />-
+          <span className={`ml-2`}> Laptop - 1280 x 720</span>
+        </label>
+        <label
+          htmlFor="mbp"
+          style={hasSelectedShape ? {} : { pointerEvents: "none" }}
+          className={`flex items-center justify-start gap-2 ${
+            styles.restolutionChoices
+          } ${hasSelectedShape ? "cursor-pointer" : ""}`}
+        >
+          <input
+            style={hasSelectedShape ? {} : { pointerEvents: "none" }}
+            type="radio"
+            id="mbp"
+            name="mbp"
+            value="mbp"
+            checked={selectedResolution === "mbp"}
+            onChange={() => handleResolutionChange("mbp")}
+            className={`${styles.restolutionChoices} ${
+              hasSelectedShape ? "cursor-pointer" : ""
             }`}
           />
-          <span
-            className={`ml-2 ${
-              hasSelectedShape ? "cursor-not-allowed opacity-50" : ""
-            }`}
-          >
-            MacBook Pro - 3024 x 1964
+          -
+          <FaApple />-
+          <span className={`ml-2 ${hasSelectedShape ? "cursor-pointer" : ""}`}>
+            MacBook Pro 13-inch
           </span>
         </label>
-        <p className="text-xs text-slate-500">
-          {hasSelectedShape ? disableMsg : ""}
-        </p>
       </div>
     </div>
   );

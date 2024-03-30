@@ -4,9 +4,8 @@
     "2": "Productivity Wallpaper ",
     "3": "in less than a 30 sec!"
   },
-
   "preview": "Preview",
-  "navBarButton": "Get me a coffee?",
+  "navBarButton": "Could you get me a coffee?",
   "language": "Language",
   "theme": "Theme",
   "screen": "Preview Screen",
@@ -21,5 +20,12 @@
   "button": {
     "reset": "Reset",
     "generate": "Generate"
+  },
+  "popup": {
+    "title": "Thank you very much for using DPWT!",
+    "content1": "You will find your new Wallpaper on your download folder",
+    "content2": "We hope you like it, but if not, feel free to generate a different one.",
+    "content3": "Get as many as you like - it's free!",
+    "content4": "For personalized wallpaper featuring your brand or any other customization, please don't hesitate to get in touch with us. You can reach us via julian-c-dev@gmail.com or connect with us on LinkedIn!"
   }
 }

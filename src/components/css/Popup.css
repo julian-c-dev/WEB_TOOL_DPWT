@@ -1,0 +1,93 @@
+.popup-content {
+  border-radius: 15px;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 75%;
+}
+@media screen and (min-width: 700px) {
+  .popup-content {
+    padding: 5rem;
+    width: 50%;
+  }
+}
+
+.modal {
+  font-size: 12px;
+}
+.modal > .header {
+  width: 100%;
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 5px;
+}
+@media screen and (min-width: 500px) {
+  .modal > .header {
+    font-size: 1.6rem;
+  }
+}
+
+@media screen and (min-width: 1100px) {
+  .modal > .header {
+    font-size: 2rem;
+  }
+}
+
+.modal > .header::after,
+.modal-ruler::after {
+  margin-top: 2rem;
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: rgb(1, 169, 175);
+}
+
+.modal > .content {
+  width: 100%;
+  padding: 10px 5px;
+  text-align: center;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-content: center;
+  font-size: 0.8rem;
+}
+@media screen and (min-width: 500px) {
+  .modal > .content {
+    font-size: 1rem;
+  }
+}
+
+.modal-contact {
+  margin: 0 auto;
+  width: 75%;
+  margin-top: 1rem;
+  font-size: 0.6rem;
+  font-style: italic;
+}
+@media screen and (min-width: 500px) {
+  .modal-contact {
+    width: 85%;
+    font-size: 0.8rem;
+  }
+}
+
+.modal > .actions {
+  width: 100%;
+  padding: 10px 5px;
+  margin: auto;
+  text-align: center;
+}
+.modal > .close {
+  cursor: pointer;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: 6px;
+  top: 2px;
+  font-size: 24px;
+}

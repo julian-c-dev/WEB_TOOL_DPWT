@@ -9,14 +9,14 @@ const SelectBg = ({ onSelectBg, isNotDarkMode }) => {
   const selectionStyles = [
     "#000410", // bg1
     "#3533cd", // bg2
-    "#A6C1EE", // bg3
+    "#800080", // bg3
     "#AE3D6C", // bg4
     "#466A2D", // bg5
-    "linear-gradient(to bottom, #000000 0%, #7c7c7c 100%)", // bg6
+    "#302B30", // bg6
     "linear-gradient(to bottom, #000000 0%, #3533cd 100%)", // bg7
-    "linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%)", // bg8
-    "linear-gradient(to bottom, #0019ff 0%, #ae3d6c 25%, #ff5c00 50%, #ffda3d 75%)", // bg9
-    "linear-gradient(to bottom, #1e352f 0%, #335145 30%, #828c51 50%, #a6c36f 70%, #beef9e 100%)", // bg10
+    "linear-gradient(to bottom, #0019ff 0%, #ae3d6c 50%, #ff5c00 100%)", // bg8
+    "linear-gradient(to bottom, #FF3131 0%, #FF914D 100%)", // bg9
+    "linear-gradient(to bottom, #0D8D4C 0%, #DFA21A 100%)", // bg10
   ];
 
   const [selectedBg, setSelectedBg] = useState(selectionStyles[0]);

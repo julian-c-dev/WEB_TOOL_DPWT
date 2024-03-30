@@ -20,5 +20,13 @@
   "button": {
     "reset": "Resetear",
     "generate": "Generar"
+  },
+
+  "popup": {
+    "title": "¡Muchas gracias por usar DPWT!",
+    "content1": "Encontrarás tu nuevo fondo de pantalla en tu carpeta de descargas",
+    "content2": "Esperamos que te guste, pero si no es así, siéntete libre de generar uno diferente.",
+    "content3": "¡Obtén tantos como quieras - son gratis!",
+    "content4": "Para obtener un fondo de escritorio con tu marca u otra personalización, no dudes en ponerte en contacto con nosotros. Envíanos un email a julian-c-dev@gmail.com o contáctanos vía LinkedIn."
   }
 }

@@ -20,7 +20,8 @@ const styles = {
 
   disableCard: "disable_card cursor-not-allowed",
 
-  normalButton: "allow_button bg-blue-gradient text-main cursor-pointer",
+  normalButton:
+    "allow_button bg-blue-gradient border border-[#61efff] text-main cursor-pointer",
   disableButton: "disable_button bg-black text-gray-500 cursor-not-allowed",
 
   marginX: "sm:mx-16 mx-6",
@@ -34,7 +35,7 @@ const styles = {
   preview8TileSelection: "py-8 px-8",
 
   restolutionChoices:
-    "font-poppins font-normal text-black text-[18px] leading-[30.8px]",
+    "font-poppins font-normal text-black text-[14px] sm:text-[18px] leading-[30.8px]",
 };
 
 export const layout = {
