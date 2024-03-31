@@ -1,8 +1,15 @@
-// Language.jsx
+//! Language.jsx
+
+//? React Imports
 import React, { useState, useLayoutEffect } from "react";
-import { useTranslation } from "react-i18next";
+
+//?  Styling Imports
 import "./css/Language.css";
 
+//?  Resource Imports
+import { useTranslation } from "react-i18next";
+
+//! COMPONENT Language:
 const Language = ({ onToggle }) => {
   const { i18n } = useTranslation();
   const [toggle, setToggle] = useState(() => i18n.language === "en");

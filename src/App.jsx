@@ -1,9 +1,19 @@
+//! App.jsx
+
+//? React Imports
 import React, { useState, useEffect } from "react";
-import { I18nextProvider } from "react-i18next";
-import i18n from "./i18n";
-import styles from "./style";
+
+//?  Component Imports
 import { Dashboard, Footer, Navbar } from "./components";
 
+//?  Styling Imports
+import styles from "./style";
+
+//?  Resource Imports
+import { I18nextProvider } from "react-i18next";
+import i18n from "./i18n";
+
+//! COMPONENT App:
 function App() {
   const [language, setLanguage] = useState("");
 

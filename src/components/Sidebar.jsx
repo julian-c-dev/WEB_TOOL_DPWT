@@ -1,4 +1,14 @@
+//! Sidebar.jsx
+
+//? React Imports
 import React, { useRef, useState } from "react";
+
+//?  Component Imports
+import InputLanguage from "./InputLanguage";
+import InputLightTheme from "./InputLightTheme";
+import InputSystem from "./InputSystem";
+
+//?  Resource Imports
 import { AnimatePresence, motion } from "framer-motion";
 import { useClickAway } from "react-use";
 import { AiOutlineRollback } from "react-icons/ai";
@@ -7,11 +17,9 @@ import { MdOutlineWbSunny } from "react-icons/md";
 import { FaApple } from "react-icons/fa";
 import { FaWindows } from "react-icons/fa";
 import { settings_dark, settings_white } from "../assets";
-import InputLanguage from "./InputLanguage";
-import InputLightTheme from "./InputLightTheme";
-import InputSystem from "./InputSystem";
 import { useTranslation } from "react-i18next";
 
+//! COMPONENT Sidebar:
 export const Sidebar = ({
   isNotDarkMode,
   toggleDarkMode,
@@ -23,12 +31,13 @@ export const Sidebar = ({
   useClickAway(ref, () => setOpen(false));
   const toggleSidebar = () => setOpen((prev) => !prev);
 
-  // * LANGUAGE
+  //*  Language
   const [languageToggle, setLanguageToggle] = useState(false);
   const handleLanguageToggle = (newToggle) => {
     setLanguageToggle(newToggle);
   };
 
+  //*  Translations
   const { t } = useTranslation();
   const language = t("language");
   const theme = t("theme");

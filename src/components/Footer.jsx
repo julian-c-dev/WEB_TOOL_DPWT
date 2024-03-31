@@ -1,4 +1,11 @@
+//! Footer.jsx
+
+//?  Styling Imports
 import styles from "../style";
+import "./css/Footer.css";
+
+//?  Resource Imports
+import { useTranslation } from "react-i18next";
 import {
   github_dark,
   github_white,
@@ -6,20 +13,28 @@ import {
   linkedin_dark,
 } from "../assets";
 
+//! COMPONENT Footer:
 const Footer = ({ isNotDarkMode }) => {
+  //*  Translations
+  const { t } = useTranslation();
+  const popupContent4 = t("popup.content4");
   return (
     <section
       className={` ${styles.flexCenter} ${styles.paddingY} flex-col pb-4 `}
     >
       <div className="w-full flex justify-between items-center md:flex-row flex-col pt-6 pb-2 border-t-[1px] border-t-[#3F3E45] ">
-        <p className="font-poppins flex flex-col sm:flex-row font-normal text-[14px] leading-[20px]">
+        <div className="font-poppins flex flex-col sm:flex-row font-normal text-[14px] leading-[20px]">
           <span
             className={` ${isNotDarkMode ? "text-main " : "text-white  "} `}
           >
-            &nbsp; Julian C Dev &nbsp; | &nbsp; Desktop Productivity Wallpaper
-            Tool. &nbsp; | &nbsp;2024 &#174;
+            &nbsp;{" "}
+            <div className="tooltip">
+              Julian C Dev
+              <span className="tooltiptext">{popupContent4}</span>
+            </div>
+            &nbsp; | &nbsp; Desktop Productivity Wallpaper Tool&#174; 2024
           </span>
-        </p>
+        </div>
         <div className="flex flex-row md:mt-0 mt-6">
           <a
             key="social-media-1"

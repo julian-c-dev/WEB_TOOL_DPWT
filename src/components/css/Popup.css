@@ -5,10 +5,11 @@
   align-items: center;
   justify-content: center;
   width: 75%;
+  background-color: rgb(255, 255, 255);
 }
 @media screen and (min-width: 700px) {
   .popup-content {
-    padding: 5rem;
+    padding: 3.5rem;
     width: 50%;
   }
 }
@@ -20,7 +21,6 @@
   width: 100%;
   font-size: 1.2rem;
   text-align: center;
-  padding: 5px;
 }
 @media screen and (min-width: 500px) {
   .modal > .header {

@@ -1,14 +1,17 @@
-// Preview.jsx
+//! Preview.jsx
+
+//?  Styling Imports
 import styles from "../style";
 import "./css/Preview.css";
 
+//! COMPONENT Preview:
 const Preview = ({
   selectedBg,
   selectedShape,
   selectedDivision,
   isOSChecked,
 }) => {
-  //* Columns of the grid in <ul> tag based on variable Division
+  // Columns of the grid in <ul> tag based on variable Division
   let cols;
   if (selectedDivision == 2 || selectedDivision == 4) {
     cols = 2;

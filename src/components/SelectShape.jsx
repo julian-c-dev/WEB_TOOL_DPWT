@@ -1,12 +1,21 @@
+//! SelectShape.jsx
+
+//? React Imports
 import React from "react";
+//?  Styling Imports
+
+import styles from "../style";
+
+//?  Resource Imports
 import { lines_black, tiles_black } from "../assets";
 import { useTranslation } from "react-i18next";
-import styles from "../style";
-import "./css/generalElements.css";
 
-const SelectShape = ({ onSelectShape, hasSelectedBg, isNotDarkMode }) => {
+//! COMPONENT SelectShape:
+const SelectShape = ({ onSelectShape, hasSelectedBg }) => {
+  //*  Translations
   const { t } = useTranslation();
   const card_sentence = t("cards.shape");
+
   const handleSelectShape = (shape) => {
     onSelectShape(shape);
   };

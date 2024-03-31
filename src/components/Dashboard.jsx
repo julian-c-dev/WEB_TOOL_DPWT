@@ -1,10 +1,7 @@
-//* Dashboard.jsx
+//! Dashboard.jsx
 
 //? React Imports
 import React, { useState } from "react";
-import Popup from "reactjs-popup";
-import "reactjs-popup/dist/index.css";
-import "./css/Popup.css";
 
 //?  Component Imports
 import SelectBg from "./SelectBg";
@@ -15,6 +12,7 @@ import Preview from "./Preview";
 
 //?  Styling Imports
 import styles from "../style";
+import "./css/Popup.css";
 import "./css/Dashboard.css";
 
 //?  Resource Imports
@@ -22,8 +20,12 @@ import { useTranslation } from "react-i18next";
 import { arrow_right } from "../assets";
 import { saveAs } from "file-saver";
 import { LuDownload } from "react-icons/lu";
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
 
+//! COMPONENT Dashboard:
 const Dashboard = ({ isNotDarkMode, isOSChecked }) => {
+  //*  Translations
   const { t } = useTranslation();
   const preview = t("preview");
   const resetButtonText = t("button.reset");
@@ -32,13 +34,16 @@ const Dashboard = ({ isNotDarkMode, isOSChecked }) => {
   const popupContent1 = t("popup.content1");
   const popupContent2 = t("popup.content2");
   const popupContent3 = t("popup.content3");
-  const popupContent4 = t("popup.content4");
+  const startAGain = t("startAGain");
+
+  //*  States
   const [selectedBg, setSelectedBg] = useState(null);
   const [selectedShape, setSelectedShape] = useState(null);
   const [selectedDivision, setSelectedDivision] = useState(4);
   const [selectedResolution, setSelectedResolution] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  //*  Logic
   const handleSelectBg = (bg) => {
     setSelectedBg(bg);
   };
@@ -101,6 +106,7 @@ const Dashboard = ({ isNotDarkMode, isOSChecked }) => {
         break;
     }
 
+    //*  Generate the url to download
     const fileName = `DPWT_${bgName}_${selectedDivision}${selectedShape[0]}_${selectedResolution}.png`;
     const downloadUrl = `/downloads/${fileName}`;
     fetch(downloadUrl)
@@ -213,8 +219,6 @@ const Dashboard = ({ isNotDarkMode, isOSChecked }) => {
                     <br />
                     {popupContent3}
                     <br />
-                    <span className="modal-ruler"></span>
-                    <div className="modal-contact">{popupContent4}</div>
                   </div>
                   <div className="actions">
                     <button
@@ -223,7 +227,7 @@ const Dashboard = ({ isNotDarkMode, isOSChecked }) => {
                         close();
                       }}
                     >
-                      Start again!
+                      {startAGain}
                     </button>
                   </div>
                 </div>

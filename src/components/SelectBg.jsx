@@ -1,11 +1,22 @@
+//! SelectDivision.jsx
+
+//? React Imports
 import React, { useState } from "react";
+
+//?  Styling Imports
 import styles from "../style";
-import "./css/generalElements.css";
+
+//?  Resource Imports
 import { useTranslation } from "react-i18next";
 
+//! COMPONENT SelectDivision:
+
 const SelectBg = ({ onSelectBg, isNotDarkMode }) => {
+  //*  Translations
   const { t } = useTranslation();
   const card_sentence = t("cards.bg");
+
+  //*  Logic
   const selectionStyles = [
     "#000410", // bg1
     "#3533cd", // bg2
@@ -19,6 +30,7 @@ const SelectBg = ({ onSelectBg, isNotDarkMode }) => {
     "linear-gradient(to bottom, #0D8D4C 0%, #DFA21A 100%)", // bg10
   ];
 
+  //*  States
   const [selectedBg, setSelectedBg] = useState(selectionStyles[0]);
 
   const handleBgClick = (index) => {

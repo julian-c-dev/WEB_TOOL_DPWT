@@ -1,3 +1,5 @@
+/** Range input style*/
+
 input[type="range"] {
   /* To remove default styles appplied by webkit browsers */
   -webkit-appearance: none;

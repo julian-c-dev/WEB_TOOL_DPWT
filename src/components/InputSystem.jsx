@@ -1,5 +1,9 @@
+//! InputSystem.jsx
+
+//? React Imports
 import React from "react";
 
+//! COMPONENT InputSystem:
 const InputSystem = ({ isOSChecked, toggleOS }) => {
   return (
     <div className="theme-switch flex flex-row items-center">

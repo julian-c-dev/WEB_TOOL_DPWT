@@ -1,3 +1,5 @@
+/** Generate Glowing Effect -> just for Dark Mode */
+
 :root {
   --glow-color: hsl(186 100% 69%);
 }
@@ -37,11 +39,6 @@
     0 0 0.45em var(--glow-color);
   text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em var(--glow-color);
   animation: none;
-}
-
-.faulty-letter {
-  opacity: 0.5;
-  animation: faulty-flicker 2s linear infinite;
 }
 
 .glowing-btn::after {
@@ -101,37 +98,6 @@
 
   .light-mode .glowing-btn::before {
     display: none;
-  }
-}
-
-@keyframes faulty-flicker {
-  0% {
-    opacity: 0.1;
-  }
-  2% {
-    opacity: 0.1;
-  }
-  4% {
-    opacity: 0.5;
-  }
-  19% {
-    opacity: 0.5;
-  }
-  21% {
-    opacity: 0.1;
-  }
-  23% {
-    opacity: 1;
-  }
-  80% {
-    opacity: 0.5;
-  }
-  83% {
-    opacity: 0.4;
-  }
-
-  87% {
-    opacity: 1;
   }
 }
 

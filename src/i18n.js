@@ -9,4 +9,4 @@ i18next.use(initReactI18next).use(LanguageDetector).use(Backend).init({
   fallbackLng: "en",
 });
 
-export default i18next; // Exporta la instancia de i18next con el nombre correcto
+export default i18next;

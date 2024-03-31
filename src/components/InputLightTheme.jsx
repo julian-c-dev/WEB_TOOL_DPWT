@@ -1,6 +1,9 @@
-// Theme.jsx
+//! Theme.jsx
+
+//?  Styling Imports
 import "./css/Theme.css";
 
+//! COMPONENT InputLightTheme:
 const InputLightTheme = ({ darkMode, toggleDarkMode }) => {
   return (
     <div className="theme-switch flex flex-row items-center">

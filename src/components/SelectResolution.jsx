@@ -1,26 +1,33 @@
+//! SelectResolution.jsx
+
+//? React Imports
 import React, { useState, useEffect } from "react";
+
+//?  Styling Imports
 import styles from "../style";
 import "./css/SelectResolution.css";
-import "./css/generalElements.css";
+
+//?  Resource Imports
 import { SlScreenDesktop } from "react-icons/sl";
 import { AiOutlineLaptop } from "react-icons/ai";
 import { FaApple } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 
+//! COMPONENT SelectResolution:
 const SelectResolution = ({
   onSelectResolution,
   hasSelectedShape,
   selectedResolution,
-  isNotDarkMode,
 }) => {
+  //*  Translations
   const { t } = useTranslation();
   const card_sentence = t("cards.resolution");
-  const disableMsg = t("disableMsg");
 
+  //*  States
   const [resolution, setResolution] = useState(selectedResolution);
 
   useEffect(() => {
-    setResolution(selectedResolution); // Actualizar la resolución seleccionada cuando cambie
+    setResolution(selectedResolution);
   }, [selectedResolution]);
 
   const handleResolutionChange = (resolution) => {

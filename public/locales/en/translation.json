@@ -10,6 +10,7 @@
   "theme": "Theme",
   "screen": "Preview Screen",
   "disableMsg": "MacBook Pro is not available yet, coming soon!",
+  "startAGain": "Start again!",
 
   "cards": {
     "bg": "Select your favorite background:",
@@ -26,6 +27,6 @@
     "content1": "You will find your new Wallpaper on your download folder",
     "content2": "We hope you like it, but if not, feel free to generate a different one.",
     "content3": "Get as many as you like - it's free!",
-    "content4": "For personalized wallpaper featuring your brand or any other customization, please don't hesitate to get in touch with us. You can reach us via julian-c-dev@gmail.com or connect with us on LinkedIn!"
+    "content4": "For personalized wallpaper featuring your brand or any other customization, please don't hesitate to get in touch with us on LinkedIn."
   }
 }

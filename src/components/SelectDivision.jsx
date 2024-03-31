@@ -1,14 +1,18 @@
+//! SelectDivision.jsx
+
+//? React Imports
 import React, { useState, useEffect } from "react";
+
+//?  Styling Imports
 import styles from "../style";
 import "./css/SelectDivision.css";
-import "./css/generalElements.css";
+
+//?  Resource Imports
 import { useTranslation } from "react-i18next";
 
-const SelectDivision = ({
-  onSelectDivision,
-  hasSelectedShape,
-  isNotDarkMode,
-}) => {
+//! COMPONENT SelectDivision:
+const SelectDivision = ({ onSelectDivision, hasSelectedShape }) => {
+  //*  Translations
   const { t } = useTranslation();
   const card_sentence = t("cards.division");
 

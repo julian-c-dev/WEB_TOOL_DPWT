@@ -1,8 +1,15 @@
-import { logo_light, logo_dark, coffee_white, coffee_dark } from "../assets";
-import Sidebar from "./Sidebar";
-import { useTranslation } from "react-i18next";
+//! Navbar.jsx
 
+//?  Component Imports
+import Sidebar from "./Sidebar";
+
+//?  Resource Imports
+import { useTranslation } from "react-i18next";
+import { logo_light, logo_dark, coffee_white, coffee_dark } from "../assets";
+
+//! COMPONENT Navbar:
 const Navbar = ({ isNotDarkMode, toggleDarkMode, isOSChecked, toggleOS }) => {
+  //*  Translations
   const { t } = useTranslation();
   const navBarButton = t("navBarButton");
 
