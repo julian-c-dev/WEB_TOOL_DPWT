@@ -12,6 +12,8 @@ import Preview from "./Preview";
 
 //?  Styling Imports
 import styles from "../style";
+
+import "reactjs-popup/dist/index.css";
 import "./css/Popup.css";
 import "./css/Dashboard.css";
 
@@ -21,7 +23,6 @@ import { arrow_right } from "../assets";
 import { saveAs } from "file-saver";
 import { LuDownload } from "react-icons/lu";
 import Popup from "reactjs-popup";
-import "reactjs-popup/dist/index.css";
 
 //! COMPONENT Dashboard:
 const Dashboard = ({ isNotDarkMode, isOSChecked }) => {

@@ -1,6 +1,5 @@
 .popup-content {
   border-radius: 15px;
-  padding: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,14 +8,20 @@
 }
 @media screen and (min-width: 700px) {
   .popup-content {
-    padding: 3.5rem;
     width: 50%;
   }
 }
 
 .modal {
   font-size: 12px;
+  padding: 1.5rem;
 }
+@media screen and (min-width: 700px) {
+  .modal {
+    padding: 3rem;
+  }
+}
+
 .modal > .header {
   width: 100%;
   font-size: 1.2rem;
@@ -46,7 +51,6 @@
 
 .modal > .content {
   width: 100%;
-  padding: 10px 5px;
   text-align: center;
   display: flex;
   flex-flow: column wrap;
