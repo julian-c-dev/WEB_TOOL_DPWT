@@ -18,10 +18,10 @@ function App() {
   const [language, setLanguage] = useState("");
 
   useEffect(() => {
-    // Detect the user´s browser language
     const userLanguage = navigator.language || navigator.userLanguage;
-    setLanguage(userLanguage);
-    i18n.changeLanguage(userLanguage); // set the language
+    const languageToSet = userLanguage.startsWith("en") ? "en" : "es";
+    setLanguage(languageToSet);
+    i18n.changeLanguage(languageToSet);
   }, []);
 
   // * light or dark THEME
