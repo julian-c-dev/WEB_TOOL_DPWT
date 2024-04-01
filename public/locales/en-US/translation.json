@@ -1,0 +1,32 @@
+{
+  "title": {
+    "1": "Create your own ",
+    "2": "Productivity Wallpaper ",
+    "3": "in less than a 30 sec!"
+  },
+  "preview": "Preview",
+  "navBarButton": "Could you get me a coffee?",
+  "language": "Language",
+  "theme": "Theme",
+  "screen": "Preview Screen",
+  "disableMsg": "MacBook Pro is not available yet, coming soon!",
+  "startAGain": "Start again!",
+
+  "cards": {
+    "bg": "Select your favorite background:",
+    "shape": "Are you tiles or lines?",
+    "division": "How many divisions:",
+    "resolution": "Choose resolution:"
+  },
+  "button": {
+    "reset": "Reset",
+    "generate": "Generate"
+  },
+  "popup": {
+    "title": "Thank you very much for using DPWT!",
+    "content1": "You will find your new Wallpaper on your download folder",
+    "content2": "We hope you like it, but if not, feel free to generate a different one.",
+    "content3": "Get as many as you like - it's free!",
+    "content4": "For personalized wallpaper featuring your brand or any other customization, please don't hesitate to get in touch with us on LinkedIn."
+  }
+}
