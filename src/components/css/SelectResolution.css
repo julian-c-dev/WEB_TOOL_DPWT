@@ -8,7 +8,7 @@ input[type="radio"]:after {
   content: "";
   display: block;
   visibility: visible;
-  margin-left: -0.1rem;
+  margin-left: 0rem;
 }
 
 input[type="radio"]:checked:after {
@@ -19,5 +19,15 @@ input[type="radio"]:checked:after {
   content: "";
   display: block;
   visibility: visible;
-  margin-left: -0.1rem;
+  margin-left: 0rem;
+}
+
+@media screen and (min-width: 430px) {
+  input[type="radio"]:after {
+    margin-left: -0.1rem;
+  }
+
+  input[type="radio"]:checked:after {
+    margin-left: -0.1rem;
+  }
 }
