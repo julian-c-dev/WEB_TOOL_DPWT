@@ -37,7 +37,7 @@ const Navbar = ({ isNotDarkMode, toggleDarkMode, isOSChecked, toggleOS }) => {
         </div>
         <button
           key={1}
-          className={`font-poppins font-normal cursor-pointer text-[10px] xs:text-[14px] py-2 flex gap-1 items-center border ${
+          className={`font-poppins font-normal cursor-pointer text-[10px] md:text-[14px] py-2 flex gap-1 items-center border ${
             isNotDarkMode
               ? "text-main border-main hover:border-[#64f2ff]"
               : "text-white  border-white hover:border-[#49CBD7]"

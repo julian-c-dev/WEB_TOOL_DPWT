@@ -89,3 +89,5 @@
 .theme-switch input:checked + label:before {
   background-color: var(--color2);
 }
+
+/* author -> Julian C Dev; April 2024 */
