@@ -32,7 +32,8 @@ const Footer = ({ isNotDarkMode }) => {
               Julian C Dev
               <span className="tooltiptext">{popupContent4}</span>
             </div>
-            &nbsp; | &nbsp; Desktop Productivity Wallpaper Tool&#174; 2024
+            &nbsp; | &nbsp; Desktop Productivity Wallpaper
+            Tool&nbsp;&#174;&nbsp;2024
           </span>
         </div>
         <div className="flex flex-row md:mt-0 mt-6">

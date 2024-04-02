@@ -33,9 +33,6 @@ const styles = {
   preview4TileSelection: "py-8 px-16",
   preview6TileSelection: "py-8 px-12",
   preview8TileSelection: "py-8 px-8",
-
-  restolutionChoices:
-    "font-poppins font-normal text-black text-[14px] sm:text-[18px] leading-[30.8px]",
 };
 
 export const layout = {

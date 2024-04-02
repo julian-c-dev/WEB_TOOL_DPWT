@@ -1,27 +1,23 @@
 /** Radios Style*/
 
 input[type="radio"]:after {
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   border-radius: 12px;
-  top: -9px;
-  left: -1px;
-  position: relative;
   background-color: #d1d3d1;
   content: "";
-  display: inline-block;
+  display: block;
   visibility: visible;
+  margin-right: 1rem;
 }
 
 input[type="radio"]:checked:after {
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   border-radius: 12px;
-  top: -8px;
-  left: -1px;
-  position: relative;
   background-color: black;
   content: "";
-  display: inline-block;
+  display: block;
   visibility: visible;
+  margin-right: 1rem;
 }

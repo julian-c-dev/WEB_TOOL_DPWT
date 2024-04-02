@@ -191,3 +191,5 @@ const framerSidebarPanel = {
   exit: { x: "-100%" },
   transition: { duration: 0.3 },
 };
+
+// author -> Julian C Dev; April 2024

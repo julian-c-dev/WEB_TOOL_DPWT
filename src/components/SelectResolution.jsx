@@ -42,11 +42,11 @@ const SelectResolution = ({
       <p className={`${styles.paragraph} ${styles.paddingY}`}>
         {card_sentence}
       </p>
-      <div className={`flex flex-col  `}>
+      <div className={`flex flex-col gap-2  `}>
         <label
           htmlFor="fhd"
           style={hasSelectedShape ? {} : { pointerEvents: "none" }}
-          className={`flex items-center justify-start gap-2 ${
+          className={`flex items-center justify-start gap-2  ${
             styles.restolutionChoices
           } ${hasSelectedShape ? "cursor-pointer" : ""}`}
         >
@@ -58,7 +58,7 @@ const SelectResolution = ({
             value="fhd"
             checked={selectedResolution === "fhd"}
             onChange={() => handleResolutionChange("fhd")}
-            className={`${styles.restolutionChoices} ${
+            className={`relative ${styles.restolutionChoices} ${
               hasSelectedShape ? "cursor-pointer" : ""
             } `}
           />
@@ -69,7 +69,7 @@ const SelectResolution = ({
         <label
           htmlFor="hd"
           style={hasSelectedShape ? {} : { pointerEvents: "none" }}
-          className={`flex items-center justify-start gap-2 ${
+          className={`flex items-center justify-start  gap-2 ${
             styles.restolutionChoices
           } ${hasSelectedShape ? "cursor-pointer" : ""}`}
         >
@@ -120,3 +120,5 @@ const SelectResolution = ({
 };
 
 export default SelectResolution;
+
+// author -> Julian C Dev; April 2024
