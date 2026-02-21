@@ -6,12 +6,8 @@ import "./css/Footer.css";
 
 //?  Resource Imports
 import { useTranslation } from "react-i18next";
-import {
-  github_dark,
-  github_white,
-  linkedin_white,
-  linkedin_dark,
-} from "../assets";
+import GitHubButton from "react-github-btn";
+import { linkedin_white, linkedin_dark } from "../assets";
 
 //! COMPONENT Footer:
 const Footer = ({ isNotDarkMode }) => {
@@ -36,27 +32,32 @@ const Footer = ({ isNotDarkMode }) => {
             Tool&nbsp;&#174;&nbsp;2024
           </span>
         </div>
-        <div className="flex flex-row md:mt-0 mt-6">
-          <a
-            key="social-media-1"
-            href="https://github.com/julian-c-dev/WEB_TOOL_PDWT"
-            target="_blank"
+        <div className="flex flex-row gap-3 items-baseline md:mt-0 mt-6">
+          <GitHubButton
+            href="https://github.com/julian-c-dev/WEB_TOOL_DPWT"
+            data-color-scheme={`no-preference: ${isNotDarkMode ? "light" : "dark"}; light: light; dark: dark;`}
+            data-icon="octicon-star"
+            data-show-count="true"
+            aria-label="Star julian-c-dev/WEB_TOOL_DPWT on GitHub"
           >
-            <img
-              src={`${isNotDarkMode ? github_dark : github_white}`}
-              alt="github link"
-              className={` w-[21px] h-[21px] object-contain cursor-pointer mr-4`}
-            />
-          </a>
+            Star
+          </GitHubButton>
+          <GitHubButton
+            href="https://github.com/julian-c-dev"
+            data-color-scheme={`no-preference: ${isNotDarkMode ? "light" : "dark"}; light: light; dark: dark;`}
+            data-show-count="true"
+            aria-label="Follow @julian-c-dev on GitHub"
+          >
+            Follow @julian-c-dev
+          </GitHubButton>
           <a
-            key="social-media-2"
             href="https://www.linkedin.com/in/julian-cantera-397197230/"
             target="_blank"
           >
             <img
               src={`${isNotDarkMode ? linkedin_dark : linkedin_white}`}
               alt="linkedin link"
-              className={` w-[21px] h-[21px] object-contain cursor-pointer mr-4`}
+              className="w-[21px] h-[21px] object-contain cursor-pointer"
             />
           </a>
         </div>
