@@ -33,7 +33,7 @@ export const TILE_COLOR_MAP = {
   light: "rgba(255,255,255,0.28)",
 };
 
-const MAX_CHARS = 40;
+const MAX_CHARS = 20;
 
 // Shared button style helper
 const makeBtn = (isNotDarkMode) => {

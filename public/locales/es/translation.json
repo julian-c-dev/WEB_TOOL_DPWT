@@ -15,7 +15,7 @@
   "tileTitles": {
     "label": "Etiqueta tus secciones (opcional):",
     "placeholder": "Sección",
-    "charLimit": "Máx. 40 caracteres por etiqueta",
+    "charLimit": "Máx. 20 caracteres por etiqueta",
     "settingsLabel": "Estilo de tus etiquetas:",
     "font": "Fuente",
     "size": "Tamaño",

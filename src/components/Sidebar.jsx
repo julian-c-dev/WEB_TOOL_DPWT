@@ -159,14 +159,14 @@ export const Sidebar = ({
                     isNotDarkMode ? "text-gray-900" : "text-white"
                   } italic text-sm`}
                 >
-                  Desktop Productivity Wallpaper Tool v1.0
+                  Desktop Productivity Wallpaper Tool v1.2
                 </p>
                 <p
                   className={`${
                     isNotDarkMode ? "text-gray-900" : "text-white"
                   } italic text-sm`}
                 >
-                  Julian C Dev - 2024 &#169;
+                  Julian C Dev &#169; 2026
                 </p>
               </div>
             </motion.div>

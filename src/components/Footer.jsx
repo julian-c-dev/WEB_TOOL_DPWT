@@ -6,8 +6,7 @@ import "./css/Footer.css";
 
 //?  Resource Imports
 import { useTranslation } from "react-i18next";
-import GitHubButton from "react-github-btn";
-import { linkedin_white, linkedin_dark } from "../assets";
+import { linkedin_white, linkedin_dark, coffee_white, coffee_dark } from "../assets";
 
 //! COMPONENT Footer:
 const Footer = ({ isNotDarkMode }) => {
@@ -29,27 +28,10 @@ const Footer = ({ isNotDarkMode }) => {
               <span className="tooltiptext">{popupContent4}</span>
             </div>
             &nbsp; | &nbsp; Desktop Productivity Wallpaper
-            Tool&nbsp;&#174;&nbsp;2024
+            Tool&nbsp;&#169;&nbsp;2026
           </span>
         </div>
-        <div className="flex flex-row gap-3 items-baseline md:mt-0 mt-6">
-          <GitHubButton
-            href="https://github.com/julian-c-dev/WEB_TOOL_DPWT"
-            data-color-scheme={`no-preference: ${isNotDarkMode ? "light" : "dark"}; light: light; dark: dark;`}
-            data-icon="octicon-star"
-            data-show-count="true"
-            aria-label="Star julian-c-dev/WEB_TOOL_DPWT on GitHub"
-          >
-            Star
-          </GitHubButton>
-          <GitHubButton
-            href="https://github.com/julian-c-dev"
-            data-color-scheme={`no-preference: ${isNotDarkMode ? "light" : "dark"}; light: light; dark: dark;`}
-            data-show-count="true"
-            aria-label="Follow @julian-c-dev on GitHub"
-          >
-            Follow @julian-c-dev
-          </GitHubButton>
+        <div className="flex flex-row gap-3 items-center md:mt-0 mt-6">
           <a
             href="https://www.linkedin.com/in/julian-cantera-397197230/"
             target="_blank"
@@ -57,6 +39,16 @@ const Footer = ({ isNotDarkMode }) => {
             <img
               src={`${isNotDarkMode ? linkedin_dark : linkedin_white}`}
               alt="linkedin link"
+              className="w-[21px] h-[21px] object-contain cursor-pointer"
+            />
+          </a>
+          <a
+            href="https://www.buymeacoffee.com/julian.c.dev"
+            target="_blank"
+          >
+            <img
+              src={`${isNotDarkMode ? coffee_dark : coffee_white}`}
+              alt="buy me a coffee"
               className="w-[21px] h-[21px] object-contain cursor-pointer"
             />
           </a>

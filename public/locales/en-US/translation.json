@@ -15,7 +15,7 @@
   "tileTitles": {
     "label": "Label your sections (optional):",
     "placeholder": "Section",
-    "charLimit": "Max 40 characters per label",
+    "charLimit": "Max 20 characters per label",
     "settingsLabel": "Style your labels:",
     "font": "Font",
     "size": "Size",

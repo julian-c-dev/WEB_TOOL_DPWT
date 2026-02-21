@@ -2,17 +2,13 @@
 
 //?  Component Imports
 import Sidebar from "./Sidebar";
+import GitHubButton from "react-github-btn";
 
 //?  Resource Imports
-import { useTranslation } from "react-i18next";
-import { logo_light, logo_dark, coffee_white, coffee_dark } from "../assets";
+import { logo_light, logo_dark } from "../assets";
 
 //! COMPONENT Navbar:
 const Navbar = ({ isNotDarkMode, toggleDarkMode, isOSChecked, toggleOS }) => {
-  //*  Translations
-  const { t } = useTranslation();
-  const navBarButton = t("navBarButton");
-
   return (
     <>
       <div
@@ -35,30 +31,25 @@ const Navbar = ({ isNotDarkMode, toggleDarkMode, isOSChecked, toggleOS }) => {
             />
           </div>
         </div>
-        <button
-          key={1}
-          className={`font-poppins font-normal cursor-pointer text-[10px] md:text-[14px] py-2 flex gap-1 items-center border ${
-            isNotDarkMode
-              ? "text-main border-main hover:border-[#64f2ff]"
-              : "text-white  border-white hover:border-[#49CBD7]"
-          }     rounded-full `}
-        >
-          <a
-            className="mx-4 flex gap-2 items-center"
-            href="https://www.buymeacoffee.com/julian.c.dev"
-            target="_blank"
+        <div className="flex gap-2 items-center">
+          <GitHubButton
+            href="https://github.com/julian-c-dev/WEB_TOOL_DPWT"
+            data-color-scheme={`no-preference: ${isNotDarkMode ? "light" : "dark"}; light: light; dark: dark;`}
+            data-icon="octicon-star"
+            data-show-count="true"
+            aria-label="Star julian-c-dev/WEB_TOOL_DPWT on GitHub"
           >
-            {navBarButton}
-            <img
-              src={`${isNotDarkMode ? coffee_dark : coffee_white}`}
-              className={`w-[20px] h-[20px] ${
-                isNotDarkMode
-                  ? "fill-slate-400 hover:fill-main"
-                  : "fill-main hover:fill-[#49CBD7]"
-              }`}
-            />
-          </a>
-        </button>
+            Star
+          </GitHubButton>
+          <GitHubButton
+            href="https://github.com/julian-c-dev"
+            data-color-scheme={`no-preference: ${isNotDarkMode ? "light" : "dark"}; light: light; dark: dark;`}
+            data-show-count="true"
+            aria-label="Follow @julian-c-dev on GitHub"
+          >
+            Follow @julian-c-dev
+          </GitHubButton>
+        </div>
       </div>
     </>
   );
