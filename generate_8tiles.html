@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DPWT — Generate 8-Tile Templates</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #111; color: #eee; padding: 2rem; }
+    h1   { margin-bottom: 0.5rem; }
+    p    { color: #aaa; margin-bottom: 1.5rem; font-size: 0.9rem; }
+    button {
+      padding: 0.75rem 2rem; font-size: 1rem; border-radius: 8px; border: none;
+      background: #3533cd; color: white; cursor: pointer;
+    }
+    button:disabled { background: #444; cursor: not-allowed; }
+    #log  { margin-top: 1.5rem; font-size: 0.85rem; color: #8cf; white-space: pre; }
+    #done { margin-top: 1rem; font-size: 1.1rem; color: #4f4; display: none; }
+  </style>
+</head>
+<body>
+  <h1>DPWT — 8-Tile Template Generator</h1>
+  <p>
+    Each tile is <strong>exactly centered within its canvas column</strong> (cellW = W/4),
+    so horizontal label placement uses <code>(col+0.5)×cellW</code>.<br>
+    The tile group is centred vertically with large margins — taskbar clearance top &amp; bottom.<br><br>
+    Place the downloaded files in <code>public/downloads/</code>, overwriting the old ones.
+  </p>
+  <button id="btn" onclick="generateAll()">Generate &amp; Download All 30 PNGs</button>
+  <div id="log"></div>
+  <div id="done">✓ Done! All 30 PNGs downloaded.</div>
+
+  <script>
+    // ─── Layout ───────────────────────────────────────────────────────────────
+    //
+    // X centering guarantee:
+    //   tile_x = col*cellW + mx   where mx = (cellW - tw) / 2
+    //   tile_center_x = (col+0.5)*cellW  ✓   (geometric formula exact)
+    //
+    // Y centering (tile group centred, equal top/bottom margin):
+    //   my  = round( (H - rows*th - (rows-1)*gy) / 2 )
+    //   tile_y[row] = my + row*(th + gy)
+    //
+    // FHD (1920×1080): cellW=480
+    //   mx=32  tw=416  [ (480-416)/2 = 32 ✓ ]
+    //   th=360  gy=60
+    //   my = (1080 - 2×360 - 60)/2 = 150px top & bottom
+    //   Row0: y=150→510   Row1: y=570→930   gap=60px   bottom-margin=150px
+    //
+    // HD  (1280×720):  cellW=320
+    //   mx=21  tw=278  [ (320-278)/2 = 21 ✓ ]
+    //   th=240  gy=40
+    //   my = (720 - 2×240 - 40)/2 = 100px top & bottom
+    //   Row0: y=100→340   Row1: y=380→620   gap=40px   bottom-margin=100px
+    //
+    const LAYOUTS = {
+      fhd: { w:1920, h:1080, cols:4, rows:2, mx:32, tw:416, th:360, r:43, gy:60 },
+      hd:  { w:1280, h: 720, cols:4, rows:2, mx:21, tw:278, th:240, r:29, gy:40 },
+      mbp: { w:1920, h:1080, cols:4, rows:2, mx:32, tw:416, th:360, r:43, gy:60 },
+    };
+
+    const TILE_COLOR = 'rgba(255,255,255,0.30)';
+
+    // ─── Backgrounds ─────────────────────────────────────────────────────────
+    const BACKGROUNDS = {
+      bg1:  { type:'solid',    color:'#000410' },
+      bg2:  { type:'solid',    color:'#3533cd' },
+      bg3:  { type:'solid',    color:'#800080' },
+      bg4:  { type:'solid',    color:'#AE3D6C' },
+      bg5:  { type:'solid',    color:'#466A2D' },
+      bg6:  { type:'solid',    color:'#302B30' },
+      bg7:  { type:'gradient', stops:[['#000000',0],['#3533cd',1]] },
+      bg8:  { type:'gradient', stops:[['#0019ff',0],['#ae3d6c',0.5],['#ff5c00',1]] },
+      bg9:  { type:'gradient', stops:[['#FF3131',0],['#FF914D',1]] },
+      bg10: { type:'gradient', stops:[['#0D8D4C',0],['#DFA21A',1]] },
+    };
+
+    // ─── Generate all ────────────────────────────────────────────────────────
+    async function generateAll() {
+      const btn = document.getElementById('btn');
+      const log = document.getElementById('log');
+      btn.disabled = true;
+      log.textContent = '';
+
+      for (const bgName of Object.keys(BACKGROUNDS)) {
+        for (const res of Object.keys(LAYOUTS)) {
+          const fileName = `DPWT_${bgName}_8t_${res}.png`;
+          log.textContent += `Generating ${fileName}...\n`;
+          await generateOne(bgName, res, fileName);
+          await sleep(150);
+        }
+      }
+
+      document.getElementById('done').style.display = 'block';
+      btn.disabled = false;
+    }
+
+    async function generateOne(bgName, res, fileName) {
+      const L  = LAYOUTS[res];
+      const bg = BACKGROUNDS[bgName];
+      const cellW = L.w / L.cols;
+      // Vertical margin: centres the tile group with equal space top and bottom
+      const my = Math.round((L.h - L.rows * L.th - (L.rows - 1) * L.gy) / 2);
+
+      const canvas = document.createElement('canvas');
+      canvas.width  = L.w;
+      canvas.height = L.h;
+      const ctx = canvas.getContext('2d');
+
+      // 1. Background
+      if (bg.type === 'solid') {
+        ctx.fillStyle = bg.color;
+        ctx.fillRect(0, 0, L.w, L.h);
+      } else {
+        const grad = ctx.createLinearGradient(0, 0, 0, L.h);
+        for (const [color, stop] of bg.stops) grad.addColorStop(stop, color);
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, L.w, L.h);
+      }
+
+      // 2. Tiles
+      //    X: col*cellW + mx  →  center = (col+0.5)*cellW  (exact)
+      //    Y: my + row*(th + gy)
+      ctx.fillStyle = TILE_COLOR;
+      for (let row = 0; row < L.rows; row++) {
+        for (let col = 0; col < L.cols; col++) {
+          const x = col * cellW + L.mx;
+          const y = my + row * (L.th + L.gy);
+          ctx.beginPath();
+          ctx.roundRect(x, y, L.tw, L.th, L.r);
+          ctx.fill();
+        }
+      }
+
+      // 3. Download
+      const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+      const url  = URL.createObjectURL(blob);
+      const a    = Object.assign(document.createElement('a'), { href: url, download: fileName });
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    const sleep = ms => new Promise(r => setTimeout(r, ms));
+  </script>
+</body>
+</html>

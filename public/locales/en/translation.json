@@ -13,8 +13,13 @@
   "startAGain": "Start again!",
 
   "tileTitles": {
-    "label": "Name your tiles (optional):",
-    "placeholder": "Tile"
+    "label": "Label your sections (optional):",
+    "placeholder": "Section",
+    "charLimit": "Max 40 characters per label",
+    "settingsLabel": "Style your labels:",
+    "font": "Font",
+    "size": "Size",
+    "labelBg": "Label BG"
   },
   "cards": {
     "bg": "Select your favorite background:",

@@ -8,7 +8,7 @@ import SelectBg from "./SelectBg";
 import SelectShape from "./SelectShape";
 import SelectResolution from "./SelectResolution";
 import SelectDivision from "./SelectDivision";
-import TileLabels from "./TileLabels";
+import { TileLabelInputs, TileLabelSettings, FONT_MAP, LABEL_COLOR_MAP, PILL_BG_MAP } from "./TileLabels";
 import Preview from "./Preview";
 
 //?  Styling Imports
@@ -45,15 +45,13 @@ const Dashboard = ({ isNotDarkMode, isOSChecked }) => {
   const [selectedResolution, setSelectedResolution] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [tileTitles, setTileTitles] = useState([]);
+  const [labelFont, setLabelFont] = useState("sf");
+  const [labelSize, setLabelSize] = useState("md");
+  const [pillBg, setPillBg] = useState("dark");
 
   //*  Logic
-  const handleSelectBg = (bg) => {
-    setSelectedBg(bg);
-  };
-
-  const handleSelectShape = (shape) => {
-    setSelectedShape(shape);
-  };
+  const handleSelectBg = (bg) => setSelectedBg(bg);
+  const handleSelectShape = (shape) => setSelectedShape(shape);
 
   const handleSelectDivision = (division) => {
     setSelectedDivision(division);
@@ -68,9 +66,7 @@ const Dashboard = ({ isNotDarkMode, isOSChecked }) => {
     });
   };
 
-  const handleSelectResolution = (resolution) => {
-    setSelectedResolution(resolution);
-  };
+  const handleSelectResolution = (resolution) => setSelectedResolution(resolution);
 
   const handleReset = () => {
     setSelectedBg(null);
@@ -78,102 +74,158 @@ const Dashboard = ({ isNotDarkMode, isOSChecked }) => {
     setSelectedDivision(4);
     setSelectedResolution(null);
     setTileTitles([]);
+    setLabelFont("sf");
+    setLabelSize("md");
+    setPillBg("dark");
   };
 
   const handleGenerate = () => {
     let bgName;
-
     switch (selectedBg) {
-      case "#000410":
-        bgName = "bg1";
-        break;
-      case "#3533cd":
-        bgName = "bg2";
-        break;
-      case "#800080":
-        bgName = "bg3";
-        break;
-      case "#AE3D6C":
-        bgName = "bg4";
-        break;
-      case "#466A2D":
-        bgName = "bg5";
-        break;
-      case "#302B30":
-        bgName = "bg6";
-        break;
-      case "linear-gradient(to bottom, #000000 0%, #3533cd 100%)":
-        bgName = "bg7";
-        break;
-      case "linear-gradient(to bottom, #0019ff 0%, #ae3d6c 50%, #ff5c00 100%)":
-        bgName = "bg8";
-        break;
-      case "linear-gradient(to bottom, #FF3131 0%, #FF914D 100%)":
-        bgName = "bg9";
-        break;
-      case "linear-gradient(to bottom, #0D8D4C 0%, #DFA21A 100%)":
-        bgName = "bg10";
-        break;
-      default:
-        bgName = "unknown";
-        break;
+      case "#000410":  bgName = "bg1";  break;
+      case "#3533cd":  bgName = "bg2";  break;
+      case "#800080":  bgName = "bg3";  break;
+      case "#AE3D6C":  bgName = "bg4";  break;
+      case "#466A2D":  bgName = "bg5";  break;
+      case "#302B30":  bgName = "bg6";  break;
+      case "linear-gradient(to bottom, #000000 0%, #3533cd 100%)":          bgName = "bg7";  break;
+      case "linear-gradient(to bottom, #0019ff 0%, #ae3d6c 50%, #ff5c00 100%)": bgName = "bg8";  break;
+      case "linear-gradient(to bottom, #FF3131 0%, #FF914D 100%)":         bgName = "bg9";  break;
+      case "linear-gradient(to bottom, #0D8D4C 0%, #DFA21A 100%)":         bgName = "bg10"; break;
+      default: bgName = "unknown"; break;
     }
 
-    //*  Generate the url to download
-    const fileName = `DPWT_${bgName}_${selectedDivision}${selectedShape[0]}_${selectedResolution}.png`;
+    const fileName   = `DPWT_${bgName}_${selectedDivision}${selectedShape[0]}_${selectedResolution}.png`;
     const downloadUrl = `/downloads/${fileName}`;
-
-    const hasTitles = tileTitles.some((t) => t && t.trim() !== "");
+    const hasTitles  = tileTitles.some((t) => t && t.trim() !== "");
+    const needsCanvas = hasTitles;
 
     fetch(downloadUrl)
-      .then((response) => response.blob())
+      .then((r) => r.blob())
       .then((blob) => {
-        if (!hasTitles) {
+        if (!needsCanvas) {
           saveAs(blob, fileName);
           return;
         }
 
-        //*  Canvas: overlay titles on top of the PNG
+        //*  Canvas: compose final image
         const img = new Image();
         img.onload = () => {
           const canvas = document.createElement("canvas");
-          canvas.width = img.naturalWidth;
+          canvas.width  = img.naturalWidth;
           canvas.height = img.naturalHeight;
           const ctx = canvas.getContext("2d");
 
+          // 1. Draw base PNG
           ctx.drawImage(img, 0, 0);
 
-          const cols =
-            selectedDivision === 2 || selectedDivision === 4
-              ? 2
-              : selectedDivision === 6
-              ? 3
-              : 4;
-          const rows = selectedDivision / cols;
-          const cellW = canvas.width / cols;
+          // 2. Grid geometry
+          const cols  = [2, 4].includes(selectedDivision) ? 2 : selectedDivision === 6 ? 3 : 4;
+          const rows  = selectedDivision === 2 ? 1 : 2;
+          const cellW = canvas.width  / cols;
           const cellH = canvas.height / rows;
-          const fontSize = Math.max(32, Math.round(cellH * 0.07));
 
-          ctx.textAlign = "center";
-          ctx.textBaseline = "middle";
-          ctx.font = `bold ${fontSize}px Poppins, Arial, sans-serif`;
-          ctx.fillStyle = "rgba(255,255,255,0.90)";
-          ctx.shadowColor = "rgba(0,0,0,0.6)";
-          ctx.shadowBlur = 10;
+          // Helper: pixel-level brightness of a point
+          const px = (d, x, y) => (d[(y * canvas.width + x) * 4] + d[(y * canvas.width + x) * 4 + 1] + d[(y * canvas.width + x) * 4 + 2]) / 3;
 
-          tileTitles.forEach((title, i) => {
-            if (!title || !title.trim()) return;
-            const col = i % cols;
-            const row = Math.floor(i / cols);
-            const x = (col + 0.5) * cellW;
-            const y = (row + 0.5) * cellH;
-            ctx.fillText(title.trim(), x, y);
-          });
+          // Helper: local background brightness from cell corners (handles gradients)
+          const cellBg = (d, cX, cY, cW, cH) => {
+            const corners = [[cX+2,cY+2],[cX+cW-3,cY+2],[cX+2,cY+cH-3],[cX+cW-3,cY+cH-3]];
+            return corners.reduce((s, [x,y]) => s + px(d, x, y), 0) / 4;
+          };
 
-          canvas.toBlob(
-            (outputBlob) => saveAs(outputBlob, fileName),
-            "image/png"
-          );
+          // 3. Pre-detect tile top per cell BEFORE any darkening
+          // 3. Detect tile top edge per cell (Y only — tiles are centered in cells so X = (col+0.5)*cellW)
+          const tileTops = [];
+          if (hasTitles && selectedShape === "tiles") {
+            const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const d = imgData.data;
+
+            for (let row = 0; row < rows; row++) {
+              for (let col = 0; col < cols; col++) {
+                const cX = Math.round(col * cellW);
+                const cY = Math.round(row * cellH);
+                const cW = Math.round((col + 1) * cellW) - cX;
+                const cH = Math.round((row + 1) * cellH) - cY;
+                const bgBright = cellBg(d, cX, cY, cW, cH);
+                const vThresh  = Math.min(bgBright + 18, 240);
+                const midX     = cX + Math.round(cW / 2);
+
+                let tileTop = cY + Math.round(cH * 0.05);
+                for (let y = cY; y < cY + cH; y++) {
+                  if (px(d, midX, y) > vThresh) { tileTop = y; break; }
+                }
+                tileTops.push(tileTop);
+              }
+            }
+          }
+
+          // 4. Draw labels
+          if (hasTitles) {
+            const sizeMap = {
+              sm: Math.max(14, Math.round(cellH * 0.030)),
+              md: Math.max(18, Math.round(cellH * 0.042)),
+              lg: Math.max(24, Math.round(cellH * 0.058)),
+            };
+            const fontSize = sizeMap[labelSize] || sizeMap.md;
+            const innerPad = Math.round(cellH * 0.03);
+
+            ctx.textAlign    = "center";
+            ctx.textBaseline = "top";
+            ctx.font         = `bold ${fontSize}px ${FONT_MAP[labelFont] || FONT_MAP.sans}`;
+
+            const pillPadX = Math.round(fontSize * 0.35);
+            const pillPadY = Math.round(fontSize * 0.18);
+            const pillR    = Math.round(fontSize * 0.28);
+
+            tileTitles.forEach((title, i) => {
+              if (!title || !title.trim()) return;
+              const col  = i % cols;
+              const row  = Math.floor(i / cols);
+              const cY   = Math.round(row * cellH);
+              const cH   = Math.round((row + 1) * cellH) - cY;
+
+              let textY;
+              if (selectedShape === "tiles" && tileTops[i] != null) {
+                textY = tileTops[i] + innerPad;
+              } else {
+                // For lines row 2, push the label further down to clear the center line
+                const lineOffset = row === 0 ? 0.04 : 0.10;
+                textY = cY + Math.round(cH * lineOffset);
+              }
+
+              // X: tiles are centered in their cell, so geometric formula is exact
+              const textX = Math.round((col + 0.5) * cellW);
+
+              // Measure text to size the pill
+              ctx.shadowColor = "transparent";
+              ctx.shadowBlur  = 0;
+              const textW = ctx.measureText(title.trim()).width;
+              const pillX = textX - textW / 2 - pillPadX;
+              const pillY = textY - pillPadY;
+              const pillW = textW + pillPadX * 2;
+              const pillH = fontSize + pillPadY * 2;
+
+              // Draw pill background
+              const pillBgColor = PILL_BG_MAP[pillBg] || PILL_BG_MAP.dark;
+              if (pillBgColor !== "transparent") {
+                ctx.fillStyle = pillBgColor;
+                ctx.beginPath();
+                ctx.roundRect(pillX, pillY, pillW, pillH, pillR);
+                ctx.fill();
+              }
+
+              // Draw text on top
+              ctx.fillStyle   = LABEL_COLOR_MAP.faded;
+              ctx.shadowColor = "rgba(0,0,0,0.45)";
+              ctx.shadowBlur  = 6;
+              ctx.fillText(title.trim(), textX, textY);
+              ctx.shadowBlur  = 0;
+            });
+          }
+
+          // 6. Export
+          canvas.toBlob((out) => saveAs(out, fileName), "image/png");
           URL.revokeObjectURL(img.src);
         };
         img.src = URL.createObjectURL(blob);
@@ -222,6 +274,9 @@ const Dashboard = ({ isNotDarkMode, isOSChecked }) => {
               selectedDivision={selectedDivision}
               isOSChecked={isOSChecked}
               tileTitles={tileTitles}
+              labelFont={labelFont}
+              labelSize={labelSize}
+              pillBg={pillBg}
             />
           </div>
           <div className={`${styles.flexCenter} gap-4`}>
@@ -290,9 +345,7 @@ const Dashboard = ({ isNotDarkMode, isOSChecked }) => {
                   <div className="actions">
                     <button
                       className={`mt-8 py-4 px-6 font-poppins font-medium text-[18px] outline-none rounded-[10px] w-[] ${styles.normalButton}`}
-                      onClick={() => {
-                        close();
-                      }}
+                      onClick={() => { close(); }}
                     >
                       {startAGain}
                     </button>
@@ -307,30 +360,47 @@ const Dashboard = ({ isNotDarkMode, isOSChecked }) => {
           className={`min-w-full sm:min-w-[647px] w-1/2 ${styles.flexCenter} sm:flex-row flex-wrap gap-4`}
         >
           <SelectBg onSelectBg={handleSelectBg} />
+
           <SelectShape
             onSelectShape={handleSelectShape}
             hasSelectedBg={selectedBg !== null}
             isNotDarkMode={isNotDarkMode}
           />
+
           <SelectDivision
             onSelectDivision={handleSelectDivision}
             hasSelectedShape={selectedShape !== null}
             isNotDarkMode={isNotDarkMode}
           />
+
+          {/* Always visible, disabled until shape chosen */}
+          <TileLabelInputs
+            tileTitles={tileTitles}
+            onTitleChange={handleTitleChange}
+            selectedDivision={selectedDivision}
+            isNotDarkMode={isNotDarkMode}
+            disabled={!selectedShape}
+          />
+
+          {/* Always visible, disabled until shape chosen */}
+          <TileLabelSettings
+            isNotDarkMode={isNotDarkMode}
+            labelFont={labelFont}
+            onFontChange={setLabelFont}
+            labelSize={labelSize}
+            onSizeChange={setLabelSize}
+            pillBg={pillBg}
+            onPillBgChange={setPillBg}
+            disabled={!selectedShape}
+          />
+
+          {/* Resolution last */}
           <SelectResolution
             onSelectResolution={handleSelectResolution}
             hasSelectedShape={selectedShape !== null}
             selectedResolution={selectedResolution}
             isNotDarkMode={isNotDarkMode}
           />
-          {selectedShape === "tiles" && (
-            <TileLabels
-              tileTitles={tileTitles}
-              onTitleChange={handleTitleChange}
-              selectedDivision={selectedDivision}
-              isNotDarkMode={isNotDarkMode}
-            />
-          )}
         </div>
       </div>
       {/* Modal */}

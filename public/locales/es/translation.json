@@ -13,8 +13,13 @@
   "startAGain": "¡Empieza de nuevo!",
 
   "tileTitles": {
-    "label": "Nombra tus secciones (opcional):",
-    "placeholder": "Sección"
+    "label": "Etiqueta tus secciones (opcional):",
+    "placeholder": "Sección",
+    "charLimit": "Máx. 40 caracteres por etiqueta",
+    "settingsLabel": "Estilo de tus etiquetas:",
+    "font": "Fuente",
+    "size": "Tamaño",
+    "labelBg": "Fondo etiq."
   },
   "cards": {
     "bg": "Selecciona tu fondo favorito:",
