@@ -12,6 +12,10 @@
   "disableMsg": "MacBook Pro is not available yet, coming soon!",
   "startAGain": "Start again!",
 
+  "tileTitles": {
+    "label": "Name your tiles (optional):",
+    "placeholder": "Tile"
+  },
   "cards": {
     "bg": "Select your favorite background:",
     "shape": "Are you tiles or lines?",

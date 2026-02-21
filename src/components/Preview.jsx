@@ -10,6 +10,7 @@ const Preview = ({
   selectedShape,
   selectedDivision,
   isOSChecked,
+  tileTitles = [],
 }) => {
   // Columns of the grid in <ul> tag based on variable Division
   let cols;
@@ -64,36 +65,25 @@ const Preview = ({
       >
         {(() => {
           //* 4 Options of TILES
-          if (selectedShape === "tiles" && selectedDivision === 8) {
-            return [1, 2, 3, 4, 5, 6, 7, 8].map((index) => (
+          const tileSizeClass = {
+            8: styles.preview8TileSelection,
+            6: styles.preview6TileSelection,
+            4: styles.preview4TileSelection,
+            2: styles.preview2TileSelection,
+          };
+          if (selectedShape === "tiles" && tileSizeClass[selectedDivision]) {
+            return Array.from({ length: selectedDivision }, (_, i) => (
               <li
-                key={index}
-                className={`${styles.tilePreview} ${styles.preview8TileSelection} `}
-              ></li>
-            ));
-          }
-          if (selectedShape === "tiles" && selectedDivision === 6) {
-            return [1, 2, 3, 4, 5, 6].map((index) => (
-              <li
-                key={index}
-                className={` ${styles.tilePreview} ${styles.preview6TileSelection}`}
-              ></li>
-            ));
-          }
-          if (selectedShape === "tiles" && selectedDivision === 4) {
-            return [1, 2, 3, 4].map((index) => (
-              <li
-                key={index}
-                className={` ${styles.tilePreview} ${styles.preview4TileSelection}`}
-              ></li>
-            ));
-          }
-          if (selectedShape === "tiles" && selectedDivision === 2) {
-            return [1, 2].map((index) => (
-              <li
-                key={index}
-                className={` ${styles.tilePreview} ${styles.preview2TileSelection}`}
-              ></li>
+                key={i}
+                className={`${styles.tilePreview} ${tileSizeClass[selectedDivision]} flex items-center justify-center`}
+              >
+                {tileTitles[i] && (
+                  <span className="text-white font-bold font-poppins leading-tight text-center break-words"
+                    style={{ fontSize: "5px", textShadow: "0 1px 2px rgba(0,0,0,0.8)", maxWidth: "100%" }}>
+                    {tileTitles[i]}
+                  </span>
+                )}
+              </li>
             ));
           }
 

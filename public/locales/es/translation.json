@@ -12,6 +12,10 @@
   "disableMsg": "MacBook Pro no está disponible aún; pronto lo estará.",
   "startAGain": "¡Empieza de nuevo!",
 
+  "tileTitles": {
+    "label": "Nombra tus secciones (opcional):",
+    "placeholder": "Sección"
+  },
   "cards": {
     "bg": "Selecciona tu fondo favorito:",
     "shape": "¿Prefieres azulejos o líneas?",

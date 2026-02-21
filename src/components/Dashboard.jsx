@@ -8,6 +8,7 @@ import SelectBg from "./SelectBg";
 import SelectShape from "./SelectShape";
 import SelectResolution from "./SelectResolution";
 import SelectDivision from "./SelectDivision";
+import TileLabels from "./TileLabels";
 import Preview from "./Preview";
 
 //?  Styling Imports
@@ -43,6 +44,7 @@ const Dashboard = ({ isNotDarkMode, isOSChecked }) => {
   const [selectedDivision, setSelectedDivision] = useState(4);
   const [selectedResolution, setSelectedResolution] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [tileTitles, setTileTitles] = useState([]);
 
   //*  Logic
   const handleSelectBg = (bg) => {
@@ -55,6 +57,15 @@ const Dashboard = ({ isNotDarkMode, isOSChecked }) => {
 
   const handleSelectDivision = (division) => {
     setSelectedDivision(division);
+    setTileTitles([]);
+  };
+
+  const handleTitleChange = (index, value) => {
+    setTileTitles((prev) => {
+      const updated = [...prev];
+      updated[index] = value;
+      return updated;
+    });
   };
 
   const handleSelectResolution = (resolution) => {
@@ -66,6 +77,7 @@ const Dashboard = ({ isNotDarkMode, isOSChecked }) => {
     setSelectedShape(null);
     setSelectedDivision(4);
     setSelectedResolution(null);
+    setTileTitles([]);
   };
 
   const handleGenerate = () => {
@@ -110,9 +122,62 @@ const Dashboard = ({ isNotDarkMode, isOSChecked }) => {
     //*  Generate the url to download
     const fileName = `DPWT_${bgName}_${selectedDivision}${selectedShape[0]}_${selectedResolution}.png`;
     const downloadUrl = `/downloads/${fileName}`;
+
+    const hasTitles = tileTitles.some((t) => t && t.trim() !== "");
+
     fetch(downloadUrl)
       .then((response) => response.blob())
-      .then((blob) => saveAs(blob, fileName))
+      .then((blob) => {
+        if (!hasTitles) {
+          saveAs(blob, fileName);
+          return;
+        }
+
+        //*  Canvas: overlay titles on top of the PNG
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          canvas.width = img.naturalWidth;
+          canvas.height = img.naturalHeight;
+          const ctx = canvas.getContext("2d");
+
+          ctx.drawImage(img, 0, 0);
+
+          const cols =
+            selectedDivision === 2 || selectedDivision === 4
+              ? 2
+              : selectedDivision === 6
+              ? 3
+              : 4;
+          const rows = selectedDivision / cols;
+          const cellW = canvas.width / cols;
+          const cellH = canvas.height / rows;
+          const fontSize = Math.max(32, Math.round(cellH * 0.07));
+
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.font = `bold ${fontSize}px Poppins, Arial, sans-serif`;
+          ctx.fillStyle = "rgba(255,255,255,0.90)";
+          ctx.shadowColor = "rgba(0,0,0,0.6)";
+          ctx.shadowBlur = 10;
+
+          tileTitles.forEach((title, i) => {
+            if (!title || !title.trim()) return;
+            const col = i % cols;
+            const row = Math.floor(i / cols);
+            const x = (col + 0.5) * cellW;
+            const y = (row + 0.5) * cellH;
+            ctx.fillText(title.trim(), x, y);
+          });
+
+          canvas.toBlob(
+            (outputBlob) => saveAs(outputBlob, fileName),
+            "image/png"
+          );
+          URL.revokeObjectURL(img.src);
+        };
+        img.src = URL.createObjectURL(blob);
+      })
       .catch((error) =>
         console.error("Error when trying to download the file.", error)
       );
@@ -156,6 +221,7 @@ const Dashboard = ({ isNotDarkMode, isOSChecked }) => {
               selectedShape={selectedShape}
               selectedDivision={selectedDivision}
               isOSChecked={isOSChecked}
+              tileTitles={tileTitles}
             />
           </div>
           <div className={`${styles.flexCenter} gap-4`}>
@@ -257,6 +323,14 @@ const Dashboard = ({ isNotDarkMode, isOSChecked }) => {
             selectedResolution={selectedResolution}
             isNotDarkMode={isNotDarkMode}
           />
+          {selectedShape === "tiles" && (
+            <TileLabels
+              tileTitles={tileTitles}
+              onTitleChange={handleTitleChange}
+              selectedDivision={selectedDivision}
+              isNotDarkMode={isNotDarkMode}
+            />
+          )}
         </div>
       </div>
       {/* Modal */}
